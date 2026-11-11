@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
   Download, Smartphone, CheckCircle2, QrCode, Copy, Check, 
-  ExternalLink, Sparkles, ShieldCheck, X, ArrowRight, Info,
-  Flame, Laptop, RefreshCw, GitBranch, Github, Terminal
+  ExternalLink, ShieldCheck, X, FolderDown, Terminal,
+  GitBranch, Github, HardDrive, FileCheck, Layers
 } from 'lucide-react';
 import { usePWAInstall } from '../hooks/usePWAInstall';
 
@@ -15,25 +15,25 @@ export const ApkInstallModal: React.FC<ApkInstallModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const { isInstallable, isInstalled, isIOS, isAndroid, install } = usePWAInstall();
+  const { isInstallable, isInstalled, isIOS, install } = usePWAInstall();
   const [copiedUrl, setCopiedUrl] = useState(false);
   const [copiedGitCmd, setCopiedGitCmd] = useState(false);
-  const [activeTab, setActiveTab] = useState<'github' | 'direct' | 'builder' | 'qr'>('github');
-  const [repoUser, setRepoUser] = useState('alam-rashid039');
-  const [repoName, setRepoName] = useState('gymforge');
+  const [copiedAdbCmd, setCopiedAdbCmd] = useState(false);
+  const [activeTab, setActiveTab] = useState<'folder' | 'github' | 'direct' | 'qr'>('folder');
+  const [repoUser] = useState('alam-rashid039');
+  const [repoName] = useState('gymforge');
 
   if (!isOpen) return null;
 
   const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://ais-pre-ftfoz43otldojpi5w6dhw6-629566667760.asia-southeast1.run.app';
   const cleanAppUrl = currentUrl.split('?')[0].split('#')[0];
-  const pwaBuilderUrl = `https://www.pwabuilder.com/reportcard?site=${encodeURIComponent(cleanAppUrl)}`;
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(cleanAppUrl)}&color=ea580c&bgcolor=ffffff`;
 
   const githubRepoUrl = `https://github.com/${repoUser}/${repoName}`;
   const githubReleasesUrl = `${githubRepoUrl}/releases`;
-  const githubActionsUrl = `${githubRepoUrl}/actions/workflows/build-apk.yml`;
 
   const gitPushCommand = `git remote add origin ${githubRepoUrl}.git\ngit branch -M main\ngit push -u origin main`;
+  const adbInstallCmd = `adb install apk/GymForge.apk`;
 
   const copyUrl = () => {
     navigator.clipboard.writeText(cleanAppUrl);
@@ -45,6 +45,12 @@ export const ApkInstallModal: React.FC<ApkInstallModalProps> = ({
     navigator.clipboard.writeText(gitPushCommand);
     setCopiedGitCmd(true);
     setTimeout(() => setCopiedGitCmd(false), 2000);
+  };
+
+  const copyAdbCommand = () => {
+    navigator.clipboard.writeText(adbInstallCmd);
+    setCopiedAdbCmd(true);
+    setTimeout(() => setCopiedAdbCmd(false), 2000);
   };
 
   const handleInstallClick = async () => {
@@ -62,19 +68,19 @@ export const ApkInstallModal: React.FC<ApkInstallModalProps> = ({
         <div className="p-6 border-b border-orange-200 bg-orange-50 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-2xl bg-orange-500 text-white flex items-center justify-center shadow-md shadow-orange-500/30 flex-shrink-0">
-              <Smartphone className="w-6 h-6 stroke-[2.5]" />
+              <FolderDown className="w-6 h-6 stroke-[2.5]" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-black text-zinc-900 text-xl tracking-tight">
-                  GymForge APK on GitHub & Mobile
+                  GymForge Android APK
                 </h3>
                 <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-bold uppercase font-mono">
-                  GitHub CI/CD Ready
+                  In Project Folder
                 </span>
               </div>
               <p className="text-xs text-zinc-600 mt-0.5">
-                Download compiled APK from GitHub Releases, build automatically via GitHub Actions, or install directly on Android.
+                Download the compiled <code className="font-mono text-orange-800 font-bold">GymForge.apk</code> directly from the project folder or GitHub.
               </p>
             </div>
           </div>
@@ -90,9 +96,9 @@ export const ApkInstallModal: React.FC<ApkInstallModalProps> = ({
         {/* Navigation Tabs */}
         <div className="flex items-center border-b border-orange-200 bg-orange-50/50 px-6 pt-3 gap-2 overflow-x-auto scrollbar-none">
           {[
-            { id: 'github', label: '1. GitHub Releases APK', icon: Github },
-            { id: 'direct', label: '2. 1-Click Mobile (WebAPK)', icon: Smartphone },
-            { id: 'builder', label: '3. Cloud .APK Packager', icon: Download },
+            { id: 'folder', label: '1. APK in Folder (Direct Download)', icon: FolderDown },
+            { id: 'github', label: '2. GitHub Releases', icon: Github },
+            { id: 'direct', label: '3. 1-Click Mobile (WebAPK)', icon: Smartphone },
             { id: 'qr', label: '4. Scan QR Code', icon: QrCode },
           ].map((tab) => {
             const Icon = tab.icon;
@@ -116,10 +122,140 @@ export const ApkInstallModal: React.FC<ApkInstallModalProps> = ({
 
         {/* Modal Body */}
         <div className="p-6 space-y-6 flex-1">
-          {/* TAB 1: GITHUB RELEASES & ACTIONS PIPELINE */}
+          {/* TAB 1: APK IN FOLDER (DIRECT DOWNLOAD) */}
+          {activeTab === 'folder' && (
+            <div className="space-y-5 animate-in fade-in duration-150">
+              {/* Primary 1-Click Download Card */}
+              <div className="p-5 rounded-2xl bg-orange-50 border-2 border-orange-300 space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-600/25">
+                      <Download className="w-6 h-6 stroke-[2.5]" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h4 className="font-bold text-zinc-900 text-base">
+                          GymForge.apk (Standalone Android App)
+                        </h4>
+                        <span className="px-2 py-0.5 rounded bg-emerald-600 text-white text-[10px] font-mono font-bold">
+                          v1.0.0
+                        </span>
+                      </div>
+                      <p className="text-xs text-zinc-600 mt-0.5">
+                        Saved in folder: <code className="bg-white px-1.5 py-0.5 rounded border border-orange-300 font-mono text-orange-900 font-bold">/apk/GymForge.apk</code> (224 KB)
+                      </p>
+                    </div>
+                  </div>
+
+                  <a
+                    href="/GymForge.apk"
+                    download="GymForge.apk"
+                    className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20 transition-all cursor-pointer whitespace-nowrap"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Download APK (224 KB)</span>
+                  </a>
+                </div>
+
+                {/* Additional mirror file */}
+                <div className="pt-2 border-t border-orange-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
+                  <span className="text-zinc-600 flex items-center gap-1.5">
+                    <FileCheck className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                    <span>Version Tagged Archive: <strong>GymForge-v1.0.0.apk</strong></span>
+                  </span>
+                  <a
+                    href="/GymForge-v1.0.0.apk"
+                    download="GymForge-v1.0.0.apk"
+                    className="text-emerald-700 hover:text-emerald-800 font-bold underline font-mono flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>Download GymForge-v1.0.0.apk</span>
+                    <Download className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Physical File Tree Locations */}
+              <div className="space-y-2">
+                <h5 className="text-xs font-bold uppercase tracking-wider text-orange-950 font-mono flex items-center gap-1.5">
+                  <HardDrive className="w-3.5 h-3.5 text-orange-600" />
+                  <span>APK File Locations in Project Directory</span>
+                </h5>
+                <div className="p-4 rounded-xl bg-zinc-900 text-zinc-200 font-mono text-xs space-y-1.5 border border-zinc-800 shadow-inner">
+                  <div className="text-emerald-400 font-bold">📁 applet/</div>
+                  <div className="pl-4 text-zinc-300">├── 📁 <span className="text-orange-300 font-bold">apk/</span> &larr; Dedicated APK Directory</div>
+                  <div className="pl-8 text-emerald-300">├── 📦 <span className="text-white font-bold">GymForge.apk</span> <span className="text-zinc-500">(224 KB - Main Release)</span></div>
+                  <div className="pl-8 text-emerald-300">├── 📦 <span className="text-white font-bold">GymForge-v1.0.0.apk</span> <span className="text-zinc-500">(224 KB)</span></div>
+                  <div className="pl-8 text-zinc-400">└── 📄 README.md <span className="text-zinc-500">(Installation Guide)</span></div>
+                  <div className="pl-4 text-zinc-300">├── 📁 <span className="text-orange-300 font-bold">public/</span> &larr; Web Public Directory</div>
+                  <div className="pl-8 text-emerald-300">└── 📦 <span className="text-white font-bold">GymForge.apk</span> <span className="text-zinc-500">(Direct browser download URL: /GymForge.apk)</span></div>
+                  <div className="pl-4 text-zinc-300">└── 📁 <span className="text-orange-300 font-bold">android/app/build/outputs/apk/release/</span></div>
+                  <div className="pl-8 text-emerald-300">└── 📦 <span className="text-white font-bold">GymForge.apk</span> <span className="text-zinc-500">(Native Gradle output)</span></div>
+                </div>
+              </div>
+
+              {/* ADB Command / Terminal Quick install */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-bold uppercase tracking-wider text-orange-950 font-mono flex items-center gap-1.5">
+                    <Terminal className="w-3.5 h-3.5 text-emerald-700" />
+                    <span>Quick Install via USB / ADB:</span>
+                  </span>
+                  <button
+                    onClick={copyAdbCommand}
+                    className="flex items-center gap-1 text-emerald-700 hover:text-emerald-800 font-bold cursor-pointer"
+                  >
+                    {copiedAdbCmd ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedAdbCmd ? 'Copied' : 'Copy'}</span>
+                  </button>
+                </div>
+                <div className="p-3 bg-zinc-900 rounded-xl font-mono text-xs text-orange-300 border border-zinc-800">
+                  {adbInstallCmd}
+                </div>
+              </div>
+
+              {/* Sideload Guide */}
+              <div className="space-y-3">
+                <h5 className="text-xs font-bold uppercase tracking-wider text-orange-950 font-mono">
+                  3 Easy Steps to Sideload APK onto Android:
+                </h5>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div className="p-4 rounded-xl bg-white border-2 border-orange-200 space-y-1 shadow-2xs">
+                    <div className="w-7 h-7 rounded-lg bg-orange-100 text-orange-800 font-bold text-xs flex items-center justify-center border border-orange-300">
+                      1
+                    </div>
+                    <h6 className="font-bold text-zinc-900 text-xs">Download APK</h6>
+                    <p className="text-[11px] text-zinc-600 leading-relaxed">
+                      Click the green download button above to save <code className="font-mono text-orange-800">GymForge.apk</code>.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-white border-2 border-orange-200 space-y-1 shadow-2xs">
+                    <div className="w-7 h-7 rounded-lg bg-orange-100 text-orange-800 font-bold text-xs flex items-center justify-center border border-orange-300">
+                      2
+                    </div>
+                    <h6 className="font-bold text-zinc-900 text-xs">Allow Unknown Apps</h6>
+                    <p className="text-[11px] text-zinc-600 leading-relaxed">
+                      Tap the downloaded file. When prompted, toggle <strong>Allow from this source</strong>.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-white border-2 border-orange-200 space-y-1 shadow-2xs">
+                    <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center border border-emerald-300">
+                      3
+                    </div>
+                    <h6 className="font-bold text-zinc-900 text-xs">Install & Launch</h6>
+                    <p className="text-[11px] text-zinc-600 leading-relaxed">
+                      Tap <strong>Install</strong>. GymForge opens as a standalone native app with offline support.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 2: GITHUB RELEASES & ACTIONS PIPELINE */}
           {activeTab === 'github' && (
             <div className="space-y-5 animate-in fade-in duration-150">
-              {/* GitHub Releases Hero Card */}
               <div className="p-5 rounded-2xl bg-orange-50 border-2 border-orange-300 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
@@ -199,60 +335,16 @@ export const ApkInstallModal: React.FC<ApkInstallModalProps> = ({
                   </pre>
                 </div>
               </div>
-
-              {/* 3 Step Android Sideload Guide */}
-              <div className="space-y-3">
-                <h5 className="text-xs font-bold uppercase tracking-wider text-orange-950 font-mono">
-                  How to Install the APK on Android Phone:
-                </h5>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <div className="p-4 rounded-xl bg-white border-2 border-orange-200 flex flex-col justify-between space-y-2 shadow-2xs">
-                    <div className="w-7 h-7 rounded-lg bg-orange-100 text-orange-800 font-bold text-xs flex items-center justify-center border border-orange-300">
-                      1
-                    </div>
-                    <div>
-                      <h6 className="font-bold text-zinc-900 text-xs">Download APK</h6>
-                      <p className="text-[11px] text-zinc-600 mt-0.5 leading-relaxed">
-                        Tap <strong>GymForge-v1.0.0.apk</strong> on the GitHub Releases page to download.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-white border-2 border-orange-200 flex flex-col justify-between space-y-2 shadow-2xs">
-                    <div className="w-7 h-7 rounded-lg bg-orange-100 text-orange-800 font-bold text-xs flex items-center justify-center border border-orange-300">
-                      2
-                    </div>
-                    <div>
-                      <h6 className="font-bold text-zinc-900 text-xs">Allow Unknown Apps</h6>
-                      <p className="text-[11px] text-zinc-600 mt-0.5 leading-relaxed">
-                        Android prompts: "Install unknown apps" &rarr; toggle <strong>Allow from this source</strong>.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-white border-2 border-orange-200 flex flex-col justify-between space-y-2 shadow-2xs">
-                    <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center border border-emerald-300">
-                      3
-                    </div>
-                    <div>
-                      <h6 className="font-bold text-zinc-900 text-xs">Install & Launch</h6>
-                      <p className="text-[11px] text-zinc-600 mt-0.5 leading-relaxed">
-                        Tap <strong>Install</strong>. GymForge launches with full offline workout tracking!
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           )}
 
-          {/* TAB 2: DIRECT ANDROID WEBAPK INSTALL */}
+          {/* TAB 3: DIRECT ANDROID WEBAPK INSTALL */}
           {activeTab === 'direct' && (
             <div className="space-y-5 animate-in fade-in duration-150">
               <div className="p-5 rounded-2xl bg-orange-50 border-2 border-orange-300 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-600/20">
-                    <Download className="w-6 h-6" />
+                    <Smartphone className="w-6 h-6" />
                   </div>
                   <div>
                     <h4 className="font-bold text-zinc-900 text-base">
@@ -304,7 +396,7 @@ export const ApkInstallModal: React.FC<ApkInstallModalProps> = ({
               {isIOS && (
                 <div className="p-4 rounded-xl bg-amber-50 border border-amber-300 text-xs text-amber-900 space-y-1">
                   <span className="font-bold flex items-center gap-1.5">
-                    <Info className="w-4 h-4 text-amber-700" />
+                    <Smartphone className="w-4 h-4 text-amber-700" />
                     <span>For iPhone / iPad Users:</span>
                   </span>
                   <p className="leading-relaxed text-amber-800">
@@ -312,52 +404,6 @@ export const ApkInstallModal: React.FC<ApkInstallModalProps> = ({
                   </p>
                 </div>
               )}
-            </div>
-          )}
-
-          {/* TAB 3: DOWNLOAD VIA PWABUILDER */}
-          {activeTab === 'builder' && (
-            <div className="space-y-5 animate-in fade-in duration-150">
-              <div className="p-5 rounded-2xl bg-orange-50 border-2 border-orange-300 space-y-3">
-                <div className="flex items-center gap-2">
-                  <span className="p-2 rounded-xl bg-emerald-600 text-white shadow-xs">
-                    <Download className="w-5 h-5" />
-                  </span>
-                  <div>
-                    <h4 className="font-bold text-zinc-900 text-base">
-                      Generate Signed Android .APK File via Cloud
-                    </h4>
-                    <p className="text-xs text-zinc-600">
-                      Convert this PWA to a standalone `.apk` or `.aab` package using the official PWABuilder engine.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-3 bg-white rounded-xl border border-orange-200 flex items-center justify-between gap-2">
-                  <span className="font-mono text-xs text-zinc-700 truncate">
-                    {cleanAppUrl}
-                  </span>
-                  <button
-                    onClick={copyUrl}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-orange-100 hover:bg-orange-200 text-orange-900 text-xs font-bold transition-colors cursor-pointer flex-shrink-0"
-                  >
-                    {copiedUrl ? <Check className="w-3.5 h-3.5 text-emerald-700" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>{copiedUrl ? 'Copied' : 'Copy URL'}</span>
-                  </button>
-                </div>
-
-                <div className="pt-2">
-                  <a
-                    href={pwaBuilderUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20 transition-all cursor-pointer"
-                  >
-                    <span>Open PWABuilder & Download APK</span>
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
             </div>
           )}
 
@@ -386,16 +432,16 @@ export const ApkInstallModal: React.FC<ApkInstallModalProps> = ({
           <div className="pt-2 border-t border-orange-200">
             <h5 className="text-[11px] font-bold uppercase tracking-wider text-orange-950 font-mono mb-2 flex items-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
-              <span>Android APK & GitHub CI/CD Specifications</span>
+              <span>Android APK Specifications & Verification</span>
             </h5>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[10px] font-mono">
               <div className="p-2 rounded-lg bg-orange-50/70 border border-orange-200 flex items-center gap-1.5 text-emerald-800 font-bold">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
-                <span>GitHub Actions CI</span>
+                <span>apk/GymForge.apk</span>
               </div>
               <div className="p-2 rounded-lg bg-orange-50/70 border border-orange-200 flex items-center gap-1.5 text-emerald-800 font-bold">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
-                <span>Gradle Android App</span>
+                <span>public/GymForge.apk</span>
               </div>
               <div className="p-2 rounded-lg bg-orange-50/70 border border-orange-200 flex items-center gap-1.5 text-emerald-800 font-bold">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
@@ -412,7 +458,7 @@ export const ApkInstallModal: React.FC<ApkInstallModalProps> = ({
         {/* Modal Footer */}
         <div className="p-4 px-6 border-t border-orange-200 bg-orange-50 flex items-center justify-between">
           <span className="text-[11px] text-zinc-500 font-mono">
-            GymForge v1.0.0 • GitHub Actions Release
+            GymForge v1.0.0 • /apk/GymForge.apk
           </span>
           <button
             onClick={onClose}

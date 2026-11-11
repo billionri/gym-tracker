@@ -146,25 +146,34 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <h4 className="font-black text-sm text-zinc-900 tracking-tight">
-                  GymForge Android APK & Mobile Installation
+                  GymForge Android APK (Ready in Folder & Direct Download)
                 </h4>
                 <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-bold uppercase font-mono">
-                  APK Ready
+                  apk/GymForge.apk
                 </span>
               </div>
               <p className="text-xs text-zinc-600 mt-0.5">
-                Install as a standalone native app on Android, scan via QR code, or download signed .apk package.
+                Download compiled <strong className="text-orange-800 font-mono">GymForge.apk</strong> (224 KB) directly or explore files in <code className="font-mono bg-white px-1 py-0.5 rounded border border-orange-200">/apk</code> folder.
               </p>
             </div>
           </div>
 
-          <button
-            onClick={onOpenApkModal}
-            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20 transition-all cursor-pointer whitespace-nowrap"
-          >
-            <Download className="w-4 h-4" />
-            <span>Install / Download APK</span>
-          </button>
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <a
+              href="/GymForge.apk"
+              download="GymForge.apk"
+              className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20 transition-all cursor-pointer whitespace-nowrap"
+            >
+              <Download className="w-4 h-4" />
+              <span>Download APK</span>
+            </a>
+            <button
+              onClick={onOpenApkModal}
+              className="px-3.5 py-2.5 rounded-xl bg-white hover:bg-orange-100 text-zinc-800 border border-orange-300 font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap"
+            >
+              APK Folder Details
+            </button>
+          </div>
         </div>
       )}
 
