@@ -100,32 +100,32 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Header Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-zinc-900 via-zinc-900 to-amber-950/40 border border-zinc-800 p-6 shadow-xl">
+      {/* Header Banner (Orange Div) */}
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-orange-100 via-orange-50 to-amber-50 border-2 border-orange-300 p-6 shadow-sm text-zinc-900">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="p-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400">
+              <span className="p-1.5 rounded-lg bg-orange-100 border border-orange-300 text-orange-700">
                 <Trophy className="w-4 h-4" />
               </span>
-              <span className="text-xs font-bold tracking-wider text-amber-400 uppercase font-mono">
+              <span className="text-xs font-bold tracking-wider text-orange-800 uppercase font-mono">
                 GymForge Gamification & Milestones
               </span>
             </div>
-            <h2 className="text-2xl font-black text-white tracking-tight flex items-center gap-2">
+            <h2 className="text-2xl font-black text-zinc-900 tracking-tight flex items-center gap-2">
               <span>Rewards & Level Progression</span>
-              <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+              <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-orange-200 text-orange-900 border border-orange-300 font-mono">
                 Level {currentLevel}
               </span>
             </h2>
-            <p className="text-sm text-zinc-400 mt-1 max-w-xl">
+            <p className="text-sm text-zinc-600 mt-1 max-w-xl">
               Earn XP by breaking personal records, logging workouts, preserving streaks, and reaching 10,000 steps. Unlock lifestyle treats, restaurant outings, and travel adventures!
             </p>
           </div>
 
           {claimableCount > 0 && (
-            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/40 text-amber-400 animate-pulse">
-              <Sparkles className="w-4 h-4" />
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-200 border-2 border-orange-400 text-orange-950 font-bold animate-pulse shadow-xs">
+              <Sparkles className="w-4 h-4 text-orange-700" />
               <span className="text-xs font-bold font-mono">
                 {claimableCount} Reward{claimableCount === 1 ? '' : 's'} Ready to Claim!
               </span>
@@ -134,24 +134,24 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
         </div>
       </div>
 
-      {/* Level & XP Overview Box (Replicating GymForge #totalXP & level progress) */}
-      <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-5 sm:p-6 shadow-lg">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pb-5 border-b border-zinc-800/80">
+      {/* Level & XP Overview Box (Orange Div) */}
+      <div className="rounded-2xl bg-orange-50/80 border-2 border-orange-300 p-5 sm:p-6 shadow-sm text-zinc-900">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pb-5 border-b border-orange-200">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 border border-amber-500/40 flex flex-col items-center justify-center flex-shrink-0">
+            <div className="w-16 h-16 rounded-2xl bg-white border-2 border-orange-300 flex flex-col items-center justify-center flex-shrink-0 shadow-xs">
               <span className="text-2xl">{rankInfo.badge}</span>
-              <span className="text-[10px] font-mono font-bold text-amber-400 uppercase">LVL {currentLevel}</span>
+              <span className="text-[10px] font-mono font-bold text-orange-700 uppercase">LVL {currentLevel}</span>
             </div>
             <div>
-              <div className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
+              <div className="text-[11px] font-mono text-orange-800 uppercase tracking-wider font-semibold">
                 Total XP Earned
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl sm:text-4xl font-black text-amber-400 font-mono tracking-tight">
+                <span className="text-3xl sm:text-4xl font-black text-orange-700 font-mono tracking-tight">
                   {totalXP}
                 </span>
                 <span className="text-xs font-bold text-zinc-500 uppercase tracking-widest">XP</span>
-                <span className={`text-xs font-bold ml-2 px-2 py-0.5 rounded-full bg-zinc-800 border border-zinc-700 ${rankInfo.color}`}>
+                <span className="text-xs font-bold ml-2 px-2 py-0.5 rounded-full bg-white border border-orange-200 text-orange-800 shadow-2xs">
                   {rankInfo.title}
                 </span>
               </div>
@@ -161,12 +161,12 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
           {/* Progress to next level */}
           <div className="w-full sm:w-64 space-y-1.5">
             <div className="flex items-center justify-between text-xs font-semibold">
-              <span className="text-zinc-400">Level {currentLevel} → Level {currentLevel + 1}</span>
-              <span className="font-mono text-amber-400 font-bold">{xpProgress} / 100 XP</span>
+              <span className="text-zinc-600">Level {currentLevel} → Level {currentLevel + 1}</span>
+              <span className="font-mono text-orange-700 font-bold">{xpProgress} / 100 XP</span>
             </div>
-            <div className="w-full h-3 rounded-full bg-zinc-950 border border-zinc-800 overflow-hidden">
+            <div className="w-full h-3 rounded-full bg-orange-200 border border-orange-300 overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-400 rounded-full transition-all duration-700 ease-out"
+                className="h-full bg-gradient-to-r from-orange-500 via-amber-500 to-orange-400 rounded-full transition-all duration-700 ease-out"
                 style={{ width: `${xpProgress}%` }}
               />
             </div>
@@ -178,81 +178,81 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
 
         {/* Live Training Stats Bar */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
-          <div className="p-3 rounded-xl bg-zinc-950/60 border border-zinc-800/80">
-            <div className="text-[10px] font-mono text-zinc-500 uppercase">Workouts Logged</div>
-            <div className="text-lg font-black text-white font-mono mt-0.5">{workoutCount}</div>
+          <div className="p-3 rounded-xl bg-white border border-orange-200 shadow-2xs">
+            <div className="text-[10px] font-mono text-zinc-500 uppercase font-semibold">Workouts Logged</div>
+            <div className="text-lg font-black text-zinc-900 font-mono mt-0.5">{workoutCount}</div>
           </div>
-          <div className="p-3 rounded-xl bg-zinc-950/60 border border-zinc-800/80">
-            <div className="text-[10px] font-mono text-zinc-500 uppercase">Iron Streak</div>
-            <div className="text-lg font-black text-orange-400 font-mono mt-0.5">{currentStreak} Days 🔥</div>
+          <div className="p-3 rounded-xl bg-white border border-orange-200 shadow-2xs">
+            <div className="text-[10px] font-mono text-zinc-500 uppercase font-semibold">Iron Streak</div>
+            <div className="text-lg font-black text-orange-600 font-mono mt-0.5">{currentStreak} Days 🔥</div>
           </div>
-          <div className="p-3 rounded-xl bg-zinc-950/60 border border-zinc-800/80">
-            <div className="text-[10px] font-mono text-zinc-500 uppercase">Total Volume</div>
-            <div className="text-lg font-black text-amber-400 font-mono mt-0.5">
+          <div className="p-3 rounded-xl bg-white border border-orange-200 shadow-2xs">
+            <div className="text-[10px] font-mono text-zinc-500 uppercase font-semibold">Total Volume</div>
+            <div className="text-lg font-black text-orange-700 font-mono mt-0.5">
               {unit === 'kg' ? totalVolumeKg.toLocaleString() : Math.round(totalVolumeKg * 2.20462).toLocaleString()} {unit}
             </div>
           </div>
-          <div className="p-3 rounded-xl bg-zinc-950/60 border border-zinc-800/80">
-            <div className="text-[10px] font-mono text-zinc-500 uppercase">Claimed Milestones</div>
-            <div className="text-lg font-black text-emerald-400 font-mono mt-0.5">
+          <div className="p-3 rounded-xl bg-white border border-orange-200 shadow-2xs">
+            <div className="text-[10px] font-mono text-zinc-500 uppercase font-semibold">Claimed Milestones</div>
+            <div className="text-lg font-black text-emerald-600 font-mono mt-0.5">
               {Object.values(claimedRewards).filter(Boolean).length} / {REWARDS_DATA.length}
             </div>
           </div>
         </div>
       </div>
 
-      {/* DAILY STEP TRACKER (Supports 10K Steps reward) */}
-      <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-5 shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      {/* DAILY STEP TRACKER (Orange Div + Green Buttons) */}
+      <div className="rounded-2xl border-2 border-orange-300 bg-orange-50 p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-zinc-900">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 flex-shrink-0">
+          <div className="w-12 h-12 rounded-xl bg-white border border-orange-300 flex items-center justify-center text-orange-600 flex-shrink-0 shadow-2xs">
             <Footprints className="w-6 h-6" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-sky-400 font-bold">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-orange-800 font-bold">
                 Daily Activity Logger
               </span>
               {dailySteps >= 10000 && (
-                <span className="px-2 py-0.2 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold">
+                <span className="px-2 py-0.2 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-mono font-bold">
                   ✓ 10K Steps Goal Met!
                 </span>
               )}
             </div>
-            <h4 className="text-base font-bold text-white mt-0.5">
-              Today's Step Count: <span className="font-mono text-sky-400">{dailySteps.toLocaleString()}</span> / 10,000 steps
+            <h4 className="text-base font-bold text-zinc-900 mt-0.5">
+              Today's Step Count: <span className="font-mono text-orange-700 font-black">{dailySteps.toLocaleString()}</span> / 10,000 steps
             </h4>
-            <div className="w-48 sm:w-64 h-2 rounded-full bg-zinc-950 border border-zinc-800 mt-2 overflow-hidden">
+            <div className="w-48 sm:w-64 h-2 rounded-full bg-orange-200 border border-orange-300 mt-2 overflow-hidden">
               <div
-                className="h-full bg-sky-400 rounded-full transition-all duration-500"
+                className="h-full bg-emerald-500 rounded-full transition-all duration-500"
                 style={{ width: `${Math.min(100, (dailySteps / 10000) * 100)}%` }}
               />
             </div>
           </div>
         </div>
 
-        {/* Quick Add Step Buttons */}
+        {/* Quick Add Step Buttons (Green Buttons) */}
         <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
           <button
             onClick={() => addSteps(1000)}
-            className="flex-1 sm:flex-none px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold border border-zinc-700 transition-colors cursor-pointer"
+            className="flex-1 sm:flex-none px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors cursor-pointer shadow-xs"
           >
             +1,000 Steps
           </button>
           <button
             onClick={() => addSteps(2500)}
-            className="flex-1 sm:flex-none px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold border border-zinc-700 transition-colors cursor-pointer"
+            className="flex-1 sm:flex-none px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors cursor-pointer shadow-xs"
           >
             +2,500 Steps
           </button>
           <button
             onClick={() => addSteps(5000)}
-            className="flex-1 sm:flex-none px-3 py-1.5 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 text-xs font-bold border border-sky-500/40 transition-colors cursor-pointer"
+            className="flex-1 sm:flex-none px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-black transition-colors cursor-pointer shadow-xs"
           >
             +5,000 Steps
           </button>
           <button
             onClick={resetSteps}
-            className="p-2 rounded-lg bg-zinc-950 text-zinc-500 hover:text-zinc-300 border border-zinc-800 transition-colors cursor-pointer"
+            className="p-2 rounded-lg bg-white text-zinc-600 hover:text-orange-600 border border-orange-300 transition-colors cursor-pointer shadow-2xs"
             title="Reset steps"
           >
             <RefreshCw className="w-3.5 h-3.5" />
@@ -260,8 +260,8 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
         </div>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="flex items-center justify-between gap-3 border-b border-zinc-800 pb-3">
+      {/* Filter Tabs (Green Buttons when active, Orange outline when inactive) */}
+      <div className="flex items-center justify-between gap-3 border-b border-orange-200 pb-3">
         <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto">
           {([
             { id: 'all', label: 'All Rewards (10)' },
@@ -274,8 +274,8 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
               onClick={() => setActiveFilter(tab.id)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                 activeFilter === tab.id
-                  ? 'bg-amber-500 text-zinc-950 shadow-md font-black'
-                  : 'bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800'
+                  ? 'bg-emerald-600 text-white shadow-sm font-black'
+                  : 'bg-orange-50 text-orange-800 hover:bg-orange-100 border border-orange-300'
               }`}
             >
               {tab.label}
@@ -288,7 +288,7 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
         </span>
       </div>
 
-      {/* Rewards Grid (10 Original Items from gym-tracker.infinityfreeapp.com) */}
+      {/* Rewards Grid (10 Orange Div Cards with Green Claim Buttons) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
         {filteredRewards.map((reward) => {
           const metricVal = getMetricValue(reward.key);
@@ -308,54 +308,49 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
           return (
             <div
               key={reward.name}
-              className={`rounded-2xl border p-5 flex flex-col justify-between transition-all duration-200 relative overflow-hidden group ${
+              className={`rounded-2xl border-2 p-5 flex flex-col justify-between transition-all duration-200 relative overflow-hidden group ${
                 isClaimed
-                  ? 'bg-zinc-900/60 border-zinc-800/80'
+                  ? 'bg-orange-50/50 border-orange-200'
                   : isUnlocked
-                  ? 'bg-gradient-to-b from-amber-500/10 via-zinc-900 to-zinc-900 border-amber-500/60 shadow-lg shadow-amber-500/10'
-                  : 'bg-zinc-900/90 border-zinc-800/90 opacity-80'
+                  ? 'bg-gradient-to-b from-orange-100/90 via-orange-50 to-white border-orange-400 shadow-md'
+                  : 'bg-white border-orange-200 opacity-90'
               }`}
             >
-              {/* Radial glow for unlocked items */}
-              {isUnlocked && !isClaimed && (
-                <div className="absolute top-0 right-0 w-36 h-36 bg-amber-500/15 rounded-full blur-2xl pointer-events-none" />
-              )}
-
               <div>
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <span className="text-4xl p-2.5 rounded-2xl bg-zinc-950/80 border border-zinc-800 shadow-inner group-hover:scale-105 transition-transform">
+                    <span className="text-4xl p-2.5 rounded-2xl bg-white border border-orange-200 shadow-xs group-hover:scale-105 transition-transform">
                       {reward.icon}
                     </span>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h4 className="font-bold text-white text-base">
+                        <h4 className="font-bold text-zinc-900 text-base">
                           {reward.name}
                         </h4>
                         {isClaimed && (
-                          <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold">
+                          <span className="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-mono font-bold">
                             Claimed
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-zinc-400 mt-0.5">
+                      <p className="text-xs text-zinc-600 mt-0.5">
                         {reward.desc}
                       </p>
                     </div>
                   </div>
 
-                  <span className="px-2 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 font-mono font-bold text-xs flex-shrink-0">
+                  <span className="px-2 py-1 rounded-lg bg-orange-100 border border-orange-300 text-orange-800 font-mono font-bold text-xs flex-shrink-0">
                     +{reward.xp} XP
                   </span>
                 </div>
 
                 {/* Lock / Progress tracker */}
-                <div className="mt-4 pt-3 border-t border-zinc-800/60">
+                <div className="mt-4 pt-3 border-t border-orange-200">
                   <div className="flex items-center justify-between text-xs mb-1.5">
                     <span className="text-zinc-500 text-[11px] font-mono">
                       {isUnlocked ? 'Unlocked!' : 'Requirement:'}
                     </span>
-                    <span className="font-mono text-zinc-300 text-[11px] font-bold">
+                    <span className="font-mono text-zinc-800 text-[11px] font-bold">
                       {reward.key === 'volume'
                         ? `${metricVal.toLocaleString()} / ${reward.thr.toLocaleString()} kg`
                         : `${metricVal.toLocaleString()} / ${reward.thr.toLocaleString()} ${getUnitLabel()}`}
@@ -363,14 +358,14 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
                   </div>
 
                   {/* Progress bar */}
-                  <div className="w-full h-1.5 rounded-full bg-zinc-950 overflow-hidden border border-zinc-800/60">
+                  <div className="w-full h-2 rounded-full bg-orange-100 overflow-hidden border border-orange-200">
                     <div
                       className={`h-full rounded-full transition-all duration-500 ${
                         isClaimed
                           ? 'bg-emerald-500'
                           : isUnlocked
-                          ? 'bg-gradient-to-r from-amber-500 to-orange-500'
-                          : 'bg-zinc-700'
+                          ? 'bg-gradient-to-r from-orange-500 to-amber-500'
+                          : 'bg-orange-300'
                       }`}
                       style={{ width: `${progressPercent}%` }}
                     />
@@ -379,11 +374,11 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
               </div>
 
               {/* Action Bottom Section */}
-              <div className="mt-4 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+              <div className="mt-4 pt-3 border-t border-orange-200 flex items-center justify-between">
                 <div>
                   {reward.action !== 'generic' && (
-                    <span className="text-[10px] font-mono text-amber-400/80 flex items-center gap-1">
-                      <Sparkles className="w-3 h-3" />
+                    <span className="text-[10px] font-mono text-orange-700 flex items-center gap-1 font-semibold">
+                      <Sparkles className="w-3 h-3 text-orange-600" />
                       <span>Special Lifestyle Treat</span>
                     </span>
                   )}
@@ -391,21 +386,22 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
 
                 <div>
                   {isClaimed ? (
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-800 px-3 py-1.5 rounded-lg bg-emerald-100 border border-emerald-300">
                       <Check className="w-3.5 h-3.5 stroke-[3]" />
                       <span>Claimed (+{reward.xp} XP)</span>
                     </div>
                   ) : isUnlocked ? (
+                    /* Green Button for CLAIM */
                     <button
                       onClick={() => handleClaimReward(reward)}
-                      className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 hover:brightness-110 text-zinc-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 transition-all cursor-pointer animate-bounce duration-1000"
+                      className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider shadow-md shadow-emerald-600/20 transition-all cursor-pointer animate-bounce duration-1000"
                     >
-                      <Gift className="w-4 h-4 fill-zinc-950 stroke-[2]" />
+                      <Gift className="w-4 h-4 fill-white stroke-[2]" />
                       <span>CLAIM 🎁</span>
                     </button>
                   ) : (
-                    <div className="flex items-center gap-1.5 text-xs text-zinc-500 font-mono px-3 py-1.5 rounded-lg bg-zinc-950 border border-zinc-800">
-                      <Lock className="w-3.5 h-3.5" />
+                    <div className="flex items-center gap-1.5 text-xs text-zinc-500 font-mono px-3 py-1.5 rounded-lg bg-orange-50 border border-orange-200">
+                      <Lock className="w-3.5 h-3.5 text-zinc-400" />
                       <span>Locked ({progressPercent}%)</span>
                     </div>
                   )}
@@ -416,29 +412,29 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
         })}
       </div>
 
-      {/* REWARD ACTION MODAL (Replicating GymForge #rewardActionModal) */}
+      {/* REWARD ACTION MODAL (Orange Div + Green Buttons) */}
       {actionModal?.isOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-zinc-900 border border-amber-500/40 rounded-3xl max-w-md w-full p-6 text-center shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-400" />
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white border-2 border-orange-400 rounded-3xl max-w-md w-full p-6 text-center shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-orange-500 via-amber-500 to-emerald-500" />
             
-            <div className="w-20 h-20 mx-auto rounded-3xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-5xl mb-4 shadow-lg shadow-amber-500/10">
+            <div className="w-20 h-20 mx-auto rounded-3xl bg-orange-50 border-2 border-orange-300 flex items-center justify-center text-5xl mb-4 shadow-sm">
               {actionModal.actionInfo.emoji}
             </div>
 
-            <h3 className="text-2xl font-black text-white uppercase tracking-tight">
+            <h3 className="text-2xl font-black text-zinc-900 uppercase tracking-tight">
               {actionModal.actionInfo.title}
             </h3>
 
-            <p className="text-sm font-semibold text-amber-400 mt-1">
+            <p className="text-sm font-bold text-orange-700 mt-1">
               {actionModal.rewardName} Unlocked!
             </p>
 
-            <p className="text-xs text-zinc-300 mt-2 leading-relaxed max-w-sm mx-auto">
+            <p className="text-xs text-zinc-600 mt-2 leading-relaxed max-w-sm mx-auto">
               {actionModal.actionInfo.sub}
             </p>
 
-            {/* Interactive Action buttons (e.g. Find restaurants near me) */}
+            {/* Interactive Green Action buttons */}
             <div className="mt-5 space-y-2.5">
               {actionModal.actionInfo.opts.map((opt, idx) => (
                 <a
@@ -446,7 +442,7 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
                   href={opt.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-gradient-to-r from-purple-600 to-violet-500 hover:from-purple-500 hover:to-violet-400 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-purple-500/20 transition-all"
+                  className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider shadow-md shadow-emerald-600/20 transition-all cursor-pointer"
                 >
                   <span>{opt.label}</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -455,7 +451,7 @@ export const RewardsMenu: React.FC<RewardsMenuProps> = ({
 
               <button
                 onClick={() => setActionModal(null)}
-                className="w-full py-3 px-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs uppercase tracking-wider border border-zinc-700 transition-colors cursor-pointer"
+                className="w-full py-3 px-4 rounded-xl bg-orange-100 hover:bg-orange-200 text-orange-950 font-bold text-xs uppercase tracking-wider border border-orange-300 transition-colors cursor-pointer"
               >
                 GOT IT, WARRIOR
               </button>

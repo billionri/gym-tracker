@@ -1,0 +1,16 @@
+{
+  "packageId": "com.gymforge.tracker",
+  "host": "ais-pre-ftfoz43otldojpi5w6dhw6-629566667760.asia-southeast1.run.app",
+  "name": "GymForge - Minimal Gym Tracker & Workout Playlist",
+  "launcherName": "GymForge",
+  "themeColor": "#ea580c",
+  "navigationColor": "#ffffff",
+  "backgroundColor": "#ffffff",
+  "startUrl": "/",
+  "iconUrl": "/pwa-512x512.png",
+  "maskableIconUrl": "/pwa-maskable-512x512.png",
+  "appVersionCode": 1,
+  "appVersionName": "1.0.0",
+  "enableNotifications": true,
+  "orientation": "portrait"
+}

@@ -25,6 +25,7 @@ import { DietPlan } from './components/DietPlan';
 import { ShoppingSection } from './components/ShoppingSection';
 import { LearningSection } from './components/LearningSection';
 import { RewardsMenu } from './components/RewardsMenu';
+import { ApkInstallModal } from './components/ApkInstallModal';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<NavTab>('dashboard');
@@ -47,6 +48,7 @@ export default function App() {
 
   // Modals & In-App Alerts
   const [isStreakModalOpen, setIsStreakModalOpen] = useState(false);
+  const [isApkModalOpen, setIsApkModalOpen] = useState(false);
   const [currentAlert, setCurrentAlert] = useState<StreakAlert | null>(null);
 
   // Subscribe to streak notifications
@@ -215,28 +217,28 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col font-sans pb-24 md:pb-16 selection:bg-amber-500/30 selection:text-amber-200">
-      {/* In-App Floating Streak / Milestone Alert Toast */}
+    <div className="min-h-screen bg-white text-zinc-900 flex flex-col font-sans pb-24 md:pb-16 selection:bg-orange-500/20 selection:text-orange-900">
+      {/* In-App Floating Streak / Milestone Alert Toast (Orange div) */}
       {currentAlert && (
-        <div className="fixed top-20 right-4 sm:right-6 z-50 max-w-sm w-full bg-zinc-900 border border-amber-500/60 rounded-2xl p-4 shadow-2xl animate-in slide-in-from-top-4 duration-300 flex items-start gap-3">
-          <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center flex-shrink-0 text-amber-400">
+        <div className="fixed top-20 right-4 sm:right-6 z-50 max-w-sm w-full bg-orange-50 border-2 border-orange-400 rounded-2xl p-4 shadow-xl animate-in slide-in-from-top-4 duration-300 flex items-start gap-3">
+          <div className="w-9 h-9 rounded-xl bg-orange-500/20 border border-orange-400 flex items-center justify-center flex-shrink-0 text-orange-600">
             {currentAlert.type === 'milestone_unlocked' ? (
-              <Award className="w-5 h-5 text-amber-400" />
+              <Award className="w-5 h-5 text-orange-600" />
             ) : (
-              <Flame className="w-5 h-5 text-orange-500 fill-orange-500" />
+              <Flame className="w-5 h-5 text-orange-600 fill-orange-500" />
             )}
           </div>
           <div className="flex-1 min-w-0">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-zinc-900 uppercase tracking-wider">
               {currentAlert.title}
             </h4>
-            <p className="text-xs text-zinc-300 mt-0.5 leading-relaxed">
+            <p className="text-xs text-zinc-700 mt-0.5 leading-relaxed">
               {currentAlert.message}
             </p>
           </div>
           <button
             onClick={() => setCurrentAlert(null)}
-            className="text-zinc-500 hover:text-white p-1"
+            className="text-zinc-400 hover:text-zinc-700 p-1 cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -249,6 +251,7 @@ export default function App() {
         setActiveTab={setActiveTab}
         streak={streak}
         onOpenStreakModal={() => setIsStreakModalOpen(true)}
+        onOpenApkModal={() => setIsApkModalOpen(true)}
         userMode={userMode}
         onToggleUserMode={handleToggleUserMode}
         unit={unit}
@@ -264,6 +267,7 @@ export default function App() {
           <Dashboard
             streak={streak}
             onOpenStreakModal={() => setIsStreakModalOpen(true)}
+            onOpenApkModal={() => setIsApkModalOpen(true)}
             sessions={sessions}
             measurements={measurements}
             currentTrack={currentTrack}
@@ -343,46 +347,47 @@ export default function App() {
         )}
       </main>
 
-      {/* Persistent Bottom Floating Audio Mini-Dock (visible on all tabs when playlist has tracks) */}
+      {/* Persistent Bottom Floating Audio Mini-Dock (Orange div + Green action buttons) */}
       {activeTab !== 'playlist' && (
-        <div className="fixed bottom-3 left-1/2 -translate-x-1/2 z-40 max-w-xl w-[92%] sm:w-auto bg-zinc-900/95 backdrop-blur-md border border-zinc-800 rounded-full px-4 py-2 shadow-2xl flex items-center justify-between gap-4">
+        <div className="fixed bottom-3 left-1/2 -translate-x-1/2 z-40 max-w-xl w-[92%] sm:w-auto bg-orange-50/95 backdrop-blur-md border-2 border-orange-400 rounded-full px-4 py-2 shadow-xl flex items-center justify-between gap-4">
           <div
             onClick={() => setActiveTab('playlist')}
             className="flex items-center gap-3 cursor-pointer min-w-0"
           >
-            <div className="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 flex-shrink-0">
+            <div className="w-8 h-8 rounded-full bg-orange-500/20 border border-orange-400 flex items-center justify-center text-orange-600 flex-shrink-0">
               <Music className={`w-4 h-4 ${isPlayingMusic ? 'animate-bounce' : ''}`} />
             </div>
             <div className="min-w-0 pr-2">
-              <div className="text-xs font-bold text-white truncate max-w-[140px] sm:max-w-[200px]">
+              <div className="text-xs font-bold text-zinc-900 truncate max-w-[140px] sm:max-w-[200px]">
                 {currentTrack.title}
               </div>
-              <div className="text-[10px] text-zinc-400 font-mono truncate">
+              <div className="text-[10px] text-zinc-600 font-mono truncate">
                 {currentTrack.bpm} BPM • {currentTrack.genre}
               </div>
             </div>
           </div>
 
           <div className="flex items-center gap-2 flex-shrink-0">
+            {/* Green Play/Pause Button */}
             <button
               onClick={toggleDockMusic}
-              className="w-8 h-8 rounded-full bg-amber-500 hover:bg-amber-400 text-zinc-950 flex items-center justify-center transition-all shadow"
+              className="w-8 h-8 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center transition-all shadow-md cursor-pointer"
             >
               {isPlayingMusic ? (
-                <Pause className="w-4 h-4 fill-zinc-950" />
+                <Pause className="w-4 h-4 fill-white" />
               ) : (
-                <Play className="w-4 h-4 fill-zinc-950 ml-0.5" />
+                <Play className="w-4 h-4 fill-white ml-0.5" />
               )}
             </button>
             <button
               onClick={handleDockNext}
-              className="w-8 h-8 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 flex items-center justify-center transition-colors"
+              className="w-8 h-8 rounded-full bg-orange-100 hover:bg-orange-200 text-zinc-700 flex items-center justify-center transition-colors cursor-pointer border border-orange-300"
             >
               <SkipForward className="w-4 h-4" />
             </button>
             <button
               onClick={() => setActiveTab('playlist')}
-              className="text-[11px] font-semibold text-amber-400 hover:underline px-2 hidden sm:inline"
+              className="text-[11px] font-bold text-orange-700 hover:text-orange-900 hover:underline px-2 hidden sm:inline"
             >
               Forge Mix
             </button>
@@ -397,6 +402,12 @@ export default function App() {
         streak={streak}
         setStreak={setStreak}
         badges={badges}
+      />
+
+      {/* Android APK & Mobile Install Modal */}
+      <ApkInstallModal
+        isOpen={isApkModalOpen}
+        onClose={() => setIsApkModalOpen(false)}
       />
     </div>
   );

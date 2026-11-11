@@ -13,7 +13,7 @@ export const LearningSection: React.FC = () => {
   const [bmrWeight, setBmrWeight] = useState(81);
   const [bmrHeight, setBmrHeight] = useState(178);
   const [bmrGender, setBmrGender] = useState<'male' | 'female'>('male');
-  const [bmrActivity, setBmrActivity] = useState(1.55); // moderate exercise
+  const [bmrActivity, setBmrActivity] = useState(1.55);
 
   // BMI calculator state
   const [bmiWeight, setBmiWeight] = useState(81);
@@ -41,13 +41,13 @@ export const LearningSection: React.FC = () => {
   const calcBmiValue = () => {
     const heightM = bmiHeight / 100;
     const bmi = +(bmiWeight / (heightM * heightM)).toFixed(1);
-    const whtr = +(bmiWaist / bmiHeight).toFixed(2); // Waist-to-Height Ratio
+    const whtr = +(bmiWaist / bmiHeight).toFixed(2);
     let status = 'Normal';
-    let color = 'text-emerald-400';
-    if (bmi < 18.5) { status = 'Underweight'; color = 'text-sky-400'; }
-    else if (bmi < 25) { status = 'Normal Weight'; color = 'text-emerald-400'; }
-    else if (bmi < 30) { status = 'Overweight'; color = 'text-amber-400'; }
-    else { status = 'Obese'; color = 'text-red-400'; }
+    let color = 'text-emerald-700';
+    if (bmi < 18.5) { status = 'Underweight'; color = 'text-sky-700'; }
+    else if (bmi < 25) { status = 'Normal Weight'; color = 'text-emerald-700'; }
+    else if (bmi < 30) { status = 'Overweight'; color = 'text-orange-700'; }
+    else { status = 'Obese'; color = 'text-red-700'; }
     return { bmi, whtr, status, color };
   };
 
@@ -87,30 +87,30 @@ export const LearningSection: React.FC = () => {
   const lbmRes = calcLbmValue();
 
   return (
-    <div className="space-y-6">
-      {/* Header Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-zinc-900 via-zinc-900 to-amber-950/40 border border-zinc-800 p-6 shadow-xl">
+    <div className="space-y-6 text-zinc-900">
+      {/* Header Banner - Orange Div */}
+      <div className="relative overflow-hidden rounded-2xl bg-orange-50 border-2 border-orange-300 p-6 shadow-sm">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="p-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400">
+              <span className="p-1.5 rounded-lg bg-orange-200 border border-orange-300 text-orange-800">
                 <BookOpen className="w-4 h-4" />
               </span>
-              <span className="text-xs font-bold tracking-wider text-amber-400 uppercase font-mono">
+              <span className="text-xs font-bold tracking-wider text-orange-800 uppercase font-mono">
                 GymForge Study Topics & Knowledge Vault
               </span>
             </div>
-            <h2 className="text-2xl font-black text-white tracking-tight">
+            <h2 className="text-2xl font-black text-zinc-900 tracking-tight">
               Anatomy, Physiology & Athletic Science
             </h2>
-            <p className="text-sm text-zinc-400 mt-1 max-w-xl">
+            <p className="text-sm text-zinc-600 mt-1 max-w-xl">
               Original GymForge reference guide: Human body muscle anatomy map, TDEE, Body Composition, and Nervous System Recovery.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Navigation Pills for Topics */}
+      {/* Navigation Pills for Topics - Green when active, Orange when inactive */}
       <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
         {[
           { id: 'anatomy', label: 'Anatomy Muscle Map', icon: Activity },
@@ -127,10 +127,10 @@ export const LearningSection: React.FC = () => {
             <button
               key={t.id}
               onClick={() => setActiveTopic(t.id as any)}
-              className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
                 isActive
-                  ? 'bg-amber-500 text-zinc-950 shadow-md'
-                  : 'bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800'
+                  ? 'bg-emerald-600 text-white shadow-xs font-bold'
+                  : 'bg-orange-50 text-orange-950 hover:bg-orange-100 border border-orange-200'
               }`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -140,53 +140,52 @@ export const LearningSection: React.FC = () => {
         })}
       </div>
 
-      {/* TOPIC 1: Human Anatomy Muscle Map (from study_topics.html) */}
+      {/* TOPIC 1: Human Anatomy Muscle Map - Orange Div with Green Button */}
       {activeTopic === 'anatomy' && (
         <div className="space-y-6 animate-in fade-in duration-200">
-          <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-6 shadow-xl">
-            <div className="flex items-center justify-between pb-4 border-b border-zinc-800 mb-4">
+          <div className="rounded-2xl bg-orange-50/80 border-2 border-orange-300 p-6 shadow-sm">
+            <div className="flex items-center justify-between pb-4 border-b border-orange-200 mb-4">
               <div>
-                <span className="text-[10px] font-mono uppercase text-amber-400 font-bold">
+                <span className="text-[10px] font-mono uppercase text-orange-800 font-bold">
                   Anatomy Reference
                 </span>
-                <h3 className="text-xl font-black text-white mt-0.5">
+                <h3 className="text-xl font-black text-zinc-900 mt-0.5">
                   Human Body Muscular Architecture
                 </h3>
-                <p className="text-xs text-zinc-400 mt-1">
+                <p className="text-xs text-zinc-600 mt-1">
                   High-definition anatomical illustration mapping anterior and posterior muscle chains from GymForge.
                 </p>
               </div>
 
               <button
                 onClick={() => setIsMapZoomed(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 border border-zinc-700"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white shadow-xs cursor-pointer"
               >
-                <ZoomIn className="w-3.5 h-3.5 text-amber-400" />
+                <ZoomIn className="w-3.5 h-3.5" />
                 <span>Zoom Anatomy Map</span>
               </button>
             </div>
 
-            {/* Muscle Map Image from gym-tracker.infinityfreeapp.com */}
+            {/* Muscle Map Image */}
             <div
               onClick={() => setIsMapZoomed(true)}
-              className="relative rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-zoom-in group max-h-[500px] flex items-center justify-center p-2"
+              className="relative rounded-2xl overflow-hidden border-2 border-orange-200 bg-white cursor-zoom-in group max-h-[500px] flex items-center justify-center p-3 shadow-2xs"
             >
               <img
                 src="https://gym-tracker.infinityfreeapp.com/images/Gym_the-muscles-of-the-human-body-with-their-names-on-a-gray-background-image-vector.jpg"
                 alt="Human Muscle Anatomy"
                 className="max-h-[480px] w-auto object-contain rounded-xl group-hover:scale-[1.02] transition-transform duration-300"
                 onError={(e) => {
-                  // Fallback to high quality anatomical diagram if infinityfree blocks hotlinking
                   (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&auto=format&fit=crop&q=80";
                 }}
               />
-              <span className="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-zinc-950/85 backdrop-blur-md border border-zinc-700 text-xs text-zinc-300 flex items-center gap-1.5">
-                <ZoomIn className="w-3 h-3 text-amber-400" />
+              <span className="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-orange-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm">
+                <ZoomIn className="w-3 h-3" />
                 <span>Click to Fullscreen</span>
               </span>
             </div>
 
-            {/* Muscle Group Breakdown Cards */}
+            {/* Muscle Group Breakdown Cards - Orange Divs */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
               {[
                 {
@@ -226,17 +225,17 @@ export const LearningSection: React.FC = () => {
                   cue: 'Posterior pelvic tilt; pull navel inward to engage deep transverse abs.',
                 },
               ].map((m, idx) => (
-                <div key={idx} className="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800">
-                  <h4 className="font-bold text-sm text-amber-400">{m.group}</h4>
-                  <p className="text-xs text-zinc-300 mt-1 leading-relaxed">{m.desc}</p>
-                  <div className="mt-2.5 pt-2 border-t border-zinc-800/80 text-[11px] space-y-1">
+                <div key={idx} className="p-4 rounded-xl bg-white border-2 border-orange-200 shadow-2xs">
+                  <h4 className="font-bold text-sm text-orange-800">{m.group}</h4>
+                  <p className="text-xs text-zinc-600 mt-1 leading-relaxed">{m.desc}</p>
+                  <div className="mt-2.5 pt-2 border-t border-orange-100 text-[11px] space-y-1">
                     <div>
                       <span className="text-zinc-500 font-semibold">Key Lifts: </span>
-                      <span className="text-zinc-300">{m.exercises}</span>
+                      <span className="text-zinc-800 font-medium">{m.exercises}</span>
                     </div>
                     <div>
-                      <span className="text-amber-500 font-semibold">Iron Form: </span>
-                      <span className="text-zinc-400">{m.cue}</span>
+                      <span className="text-emerald-700 font-bold">Iron Form: </span>
+                      <span className="text-zinc-600">{m.cue}</span>
                     </div>
                   </div>
                 </div>
@@ -249,28 +248,28 @@ export const LearningSection: React.FC = () => {
       {/* TOPIC 2: BMR & TDEE Metabolism Calculator */}
       {activeTopic === 'bmr' && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-in fade-in duration-200">
-          <div className="lg:col-span-5 rounded-2xl bg-zinc-900 border border-zinc-800 p-5 shadow-lg space-y-4">
-            <h3 className="font-bold text-white text-base">Mifflin-St Jeor BMR Calculator</h3>
-            <p className="text-xs text-zinc-400">
+          <div className="lg:col-span-5 rounded-2xl bg-orange-50/80 border-2 border-orange-300 p-5 shadow-sm space-y-4">
+            <h3 className="font-bold text-zinc-900 text-base">Mifflin-St Jeor BMR Calculator</h3>
+            <p className="text-xs text-zinc-600">
               Basal Metabolic Rate is the baseline energy expenditure your body burns strictly at rest.
             </p>
 
             <div className="space-y-3">
               <div>
-                <label className="block text-xs font-semibold text-zinc-400 mb-1">Gender</label>
+                <label className="block text-xs font-semibold text-orange-950 mb-1">Gender</label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => setBmrGender('male')}
-                    className={`py-2 rounded-xl text-xs font-bold border transition-colors ${
-                      bmrGender === 'male' ? 'bg-amber-500 text-zinc-950 border-amber-500' : 'bg-zinc-950 border-zinc-800 text-zinc-400'
+                    className={`py-2 rounded-xl text-xs font-bold border-2 transition-colors cursor-pointer ${
+                      bmrGender === 'male' ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs' : 'bg-white border-orange-200 text-zinc-700'
                     }`}
                   >
                     Male (Beast)
                   </button>
                   <button
                     onClick={() => setBmrGender('female')}
-                    className={`py-2 rounded-xl text-xs font-bold border transition-colors ${
-                      bmrGender === 'female' ? 'bg-amber-500 text-zinc-950 border-amber-500' : 'bg-zinc-950 border-zinc-800 text-zinc-400'
+                    className={`py-2 rounded-xl text-xs font-bold border-2 transition-colors cursor-pointer ${
+                      bmrGender === 'female' ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs' : 'bg-white border-orange-200 text-zinc-700'
                     }`}
                   >
                     Female (Queen)
@@ -280,40 +279,40 @@ export const LearningSection: React.FC = () => {
 
               <div className="grid grid-cols-3 gap-2">
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-400 mb-1">Age</label>
+                  <label className="block text-xs font-semibold text-orange-950 mb-1">Age</label>
                   <input
                     type="number"
                     value={bmrAge}
                     onChange={(e) => setBmrAge(Number(e.target.value))}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2 text-xs text-white font-mono"
+                    className="w-full bg-white border border-orange-300 rounded-xl p-2 text-xs text-zinc-900 font-mono"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-400 mb-1">Weight (kg)</label>
+                  <label className="block text-xs font-semibold text-orange-950 mb-1">Weight (kg)</label>
                   <input
                     type="number"
                     value={bmrWeight}
                     onChange={(e) => setBmrWeight(Number(e.target.value))}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2 text-xs text-white font-mono"
+                    className="w-full bg-white border border-orange-300 rounded-xl p-2 text-xs text-zinc-900 font-mono"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-400 mb-1">Height (cm)</label>
+                  <label className="block text-xs font-semibold text-orange-950 mb-1">Height (cm)</label>
                   <input
                     type="number"
                     value={bmrHeight}
                     onChange={(e) => setBmrHeight(Number(e.target.value))}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2 text-xs text-white font-mono"
+                    className="w-full bg-white border border-orange-300 rounded-xl p-2 text-xs text-zinc-900 font-mono"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-zinc-400 mb-1">Weekly Activity Level</label>
+                <label className="block text-xs font-semibold text-orange-950 mb-1">Weekly Activity Level</label>
                 <select
                   value={bmrActivity}
                   onChange={(e) => setBmrActivity(Number(e.target.value))}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2 text-xs text-white"
+                  className="w-full bg-white border border-orange-300 rounded-xl p-2 text-xs text-zinc-900 font-medium"
                 >
                   <option value={1.2}>Sedentary (desk job, no training)</option>
                   <option value={1.375}>Light Active (1-3 gym days/wk)</option>
@@ -327,40 +326,40 @@ export const LearningSection: React.FC = () => {
 
           <div className="lg:col-span-7 space-y-4">
             <div className="grid grid-cols-2 gap-3">
-              <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
-                <span className="text-[10px] font-mono uppercase text-zinc-500">Resting BMR</span>
-                <div className="text-2xl font-black text-white font-mono mt-1">
+              <div className="p-4 rounded-2xl bg-orange-50/80 border-2 border-orange-300 shadow-2xs">
+                <span className="text-[10px] font-mono uppercase text-orange-800 font-bold">Resting BMR</span>
+                <div className="text-2xl font-black text-zinc-900 font-mono mt-1">
                   {bmrRes.bmr} <span className="text-xs text-zinc-500">kcal/day</span>
                 </div>
-                <p className="text-[11px] text-zinc-400 mt-1">Basic coma survival expenditure.</p>
+                <p className="text-[11px] text-zinc-600 mt-1">Basic coma survival expenditure.</p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-zinc-900 border border-amber-500/40">
-                <span className="text-[10px] font-mono uppercase text-amber-400 font-bold">Total Daily TDEE</span>
-                <div className="text-2xl font-black text-amber-400 font-mono mt-1">
-                  {bmrRes.tdee} <span className="text-xs text-zinc-400">kcal/day</span>
+              <div className="p-4 rounded-2xl bg-orange-100/70 border-2 border-orange-400 shadow-2xs">
+                <span className="text-[10px] font-mono uppercase text-orange-900 font-bold">Total Daily TDEE</span>
+                <div className="text-2xl font-black text-orange-700 font-mono mt-1">
+                  {bmrRes.tdee} <span className="text-xs text-orange-800">kcal/day</span>
                 </div>
-                <p className="text-[11px] text-zinc-300 mt-1">Maintenance energy target.</p>
+                <p className="text-[11px] text-zinc-700 mt-1">Maintenance energy target.</p>
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-3">
-              <h4 className="font-bold text-white text-sm">Caloric Strategy Targets</h4>
+            <div className="p-5 rounded-2xl bg-orange-50/80 border-2 border-orange-300 space-y-3">
+              <h4 className="font-bold text-zinc-900 text-sm">Caloric Strategy Targets</h4>
               <div className="space-y-2">
-                <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800 flex items-center justify-between">
+                <div className="p-3 rounded-xl bg-white border border-orange-200 flex items-center justify-between">
                   <div>
-                    <span className="text-xs font-bold text-emerald-400">Fat Loss Deficit (Cut)</span>
-                    <p className="text-[10px] text-zinc-400">~0.4 kg/week fat burn without muscle wasting</p>
+                    <span className="text-xs font-bold text-emerald-700">Fat Loss Deficit (Cut)</span>
+                    <p className="text-[10px] text-zinc-500">~0.4 kg/week fat burn without muscle wasting</p>
                   </div>
-                  <span className="font-mono text-base font-bold text-white">{bmrRes.cut} kcal</span>
+                  <span className="font-mono text-base font-bold text-zinc-900">{bmrRes.cut} kcal</span>
                 </div>
 
-                <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800 flex items-center justify-between">
+                <div className="p-3 rounded-xl bg-white border border-orange-200 flex items-center justify-between">
                   <div>
-                    <span className="text-xs font-bold text-cyan-400">Hypertrophy Surplus (Lean Bulk)</span>
-                    <p className="text-[10px] text-zinc-400">Optimal rate for progressive muscular overload</p>
+                    <span className="text-xs font-bold text-orange-700">Hypertrophy Surplus (Lean Bulk)</span>
+                    <p className="text-[10px] text-zinc-500">Optimal rate for progressive muscular overload</p>
                   </div>
-                  <span className="font-mono text-base font-bold text-white">{bmrRes.bulk} kcal</span>
+                  <span className="font-mono text-base font-bold text-zinc-900">{bmrRes.bulk} kcal</span>
                 </div>
               </div>
             </div>
@@ -371,40 +370,40 @@ export const LearningSection: React.FC = () => {
       {/* TOPIC 3: BMI & Obesity Rating */}
       {activeTopic === 'bmi' && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-in fade-in duration-200">
-          <div className="lg:col-span-5 rounded-2xl bg-zinc-900 border border-zinc-800 p-5 shadow-lg space-y-4">
-            <h3 className="font-bold text-white text-base">BMI & Waist Ratio Analysis</h3>
-            <p className="text-xs text-zinc-400">
+          <div className="lg:col-span-5 rounded-2xl bg-orange-50/80 border-2 border-orange-300 p-5 shadow-sm space-y-4">
+            <h3 className="font-bold text-zinc-900 text-base">BMI & Waist Ratio Analysis</h3>
+            <p className="text-xs text-zinc-600">
               Combines Body Mass Index with Waist-to-Height Ratio (WHtR) for lifters who carry dense muscle tissue.
             </p>
 
             <div className="space-y-3">
               <div>
-                <label className="block text-xs font-semibold text-zinc-400 mb-1">Body Weight (kg)</label>
+                <label className="block text-xs font-semibold text-orange-950 mb-1">Body Weight (kg)</label>
                 <input
                   type="number"
                   value={bmiWeight}
                   onChange={(e) => setBmiWeight(Number(e.target.value))}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2 text-xs text-white font-mono"
+                  className="w-full bg-white border border-orange-300 rounded-xl p-2 text-xs text-zinc-900 font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-zinc-400 mb-1">Height (cm)</label>
+                <label className="block text-xs font-semibold text-orange-950 mb-1">Height (cm)</label>
                 <input
                   type="number"
                   value={bmiHeight}
                   onChange={(e) => setBmiHeight(Number(e.target.value))}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2 text-xs text-white font-mono"
+                  className="w-full bg-white border border-orange-300 rounded-xl p-2 text-xs text-zinc-900 font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-zinc-400 mb-1">Waist Circumference (cm)</label>
+                <label className="block text-xs font-semibold text-orange-950 mb-1">Waist Circumference (cm)</label>
                 <input
                   type="number"
                   value={bmiWaist}
                   onChange={(e) => setBmiWaist(Number(e.target.value))}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2 text-xs text-white font-mono"
+                  className="w-full bg-white border border-orange-300 rounded-xl p-2 text-xs text-zinc-900 font-mono"
                 />
               </div>
             </div>
@@ -412,28 +411,28 @@ export const LearningSection: React.FC = () => {
 
           <div className="lg:col-span-7 space-y-4">
             <div className="grid grid-cols-2 gap-3">
-              <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
-                <span className="text-[10px] font-mono uppercase text-zinc-500">BMI Score</span>
-                <div className="text-3xl font-black text-white font-mono mt-1">
+              <div className="p-4 rounded-2xl bg-orange-50/80 border-2 border-orange-300">
+                <span className="text-[10px] font-mono uppercase text-orange-800 font-bold">BMI Score</span>
+                <div className="text-3xl font-black text-zinc-900 font-mono mt-1">
                   {bmiRes.bmi}
                 </div>
                 <span className={`text-xs font-bold mt-1 block ${bmiRes.color}`}>{bmiRes.status}</span>
               </div>
 
-              <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
-                <span className="text-[10px] font-mono uppercase text-zinc-500">Waist / Height (WHtR)</span>
-                <div className="text-3xl font-black text-amber-400 font-mono mt-1">
+              <div className="p-4 rounded-2xl bg-orange-50/80 border-2 border-orange-300">
+                <span className="text-[10px] font-mono uppercase text-orange-800 font-bold">Waist / Height (WHtR)</span>
+                <div className="text-3xl font-black text-orange-700 font-mono mt-1">
                   {bmiRes.whtr}
                 </div>
-                <span className="text-xs text-zinc-300 mt-1 block">
+                <span className="text-xs text-zinc-700 mt-1 block font-medium">
                   {bmiRes.whtr <= 0.5 ? '✓ Ideal Cardiovascular Profile' : '⚠️ Elevated Central Adiposity'}
                 </span>
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-2">
-              <h4 className="font-bold text-white text-sm">Iron Lifter Caution Note</h4>
-              <p className="text-xs text-zinc-400 leading-relaxed">
+            <div className="p-5 rounded-2xl bg-white border-2 border-orange-200 space-y-2">
+              <h4 className="font-bold text-zinc-900 text-sm">Iron Lifter Caution Note</h4>
+              <p className="text-xs text-zinc-600 leading-relaxed">
                 BMI does not distinguish between dense skeletal muscle and adiposity. If your waist circumference is under half your height (WHtR &lt; 0.5), higher BMI typically represents lean muscular development.
               </p>
             </div>
@@ -444,26 +443,26 @@ export const LearningSection: React.FC = () => {
       {/* TOPIC 4: Body Fat % & LBM */}
       {activeTopic === 'bodyfat' && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-in fade-in duration-200">
-          <div className="lg:col-span-5 rounded-2xl bg-zinc-900 border border-zinc-800 p-5 shadow-lg space-y-4">
-            <h3 className="font-bold text-white text-base">Body Fat % to Lean Mass Calculator</h3>
+          <div className="lg:col-span-5 rounded-2xl bg-orange-50/80 border-2 border-orange-300 p-5 shadow-sm space-y-4">
+            <h3 className="font-bold text-zinc-900 text-base">Body Fat % to Lean Mass Calculator</h3>
             <div className="space-y-3">
               <div>
-                <label className="block text-xs font-semibold text-zinc-400 mb-1">Body Weight (kg)</label>
+                <label className="block text-xs font-semibold text-orange-950 mb-1">Body Weight (kg)</label>
                 <input
                   type="number"
                   value={bfWeight}
                   onChange={(e) => setBfWeight(Number(e.target.value))}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2 text-xs text-white font-mono"
+                  className="w-full bg-white border border-orange-300 rounded-xl p-2 text-xs text-zinc-900 font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-zinc-400 mb-1">Body Fat Percentage (%)</label>
+                <label className="block text-xs font-semibold text-orange-950 mb-1">Body Fat Percentage (%)</label>
                 <input
                   type="number"
                   value={bfPercent}
                   onChange={(e) => setBfPercent(Number(e.target.value))}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2 text-xs text-white font-mono"
+                  className="w-full bg-white border border-orange-300 rounded-xl p-2 text-xs text-zinc-900 font-mono"
                 />
               </div>
             </div>
@@ -471,20 +470,20 @@ export const LearningSection: React.FC = () => {
 
           <div className="lg:col-span-7 space-y-4">
             <div className="grid grid-cols-2 gap-3">
-              <div className="p-4 rounded-2xl bg-zinc-900 border border-emerald-500/30">
-                <span className="text-[10px] font-mono uppercase text-emerald-400 font-bold">Lean Body Mass (LBM)</span>
-                <div className="text-3xl font-black text-white font-mono mt-1">
+              <div className="p-4 rounded-2xl bg-orange-50/80 border-2 border-orange-300">
+                <span className="text-[10px] font-mono uppercase text-emerald-700 font-bold">Lean Body Mass (LBM)</span>
+                <div className="text-3xl font-black text-zinc-900 font-mono mt-1">
                   {lbmRes.leanMassKg} <span className="text-sm font-medium text-zinc-500">kg</span>
                 </div>
-                <p className="text-xs text-zinc-400 mt-1">Muscle, organs, bones & blood volume.</p>
+                <p className="text-xs text-zinc-600 mt-1">Muscle, organs, bones & blood volume.</p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
-                <span className="text-[10px] font-mono uppercase text-zinc-500">Total Adipose Mass</span>
-                <div className="text-3xl font-black text-amber-400 font-mono mt-1">
+              <div className="p-4 rounded-2xl bg-orange-50/80 border-2 border-orange-300">
+                <span className="text-[10px] font-mono uppercase text-orange-800 font-bold">Total Adipose Mass</span>
+                <div className="text-3xl font-black text-orange-700 font-mono mt-1">
                   {lbmRes.fatMassKg} <span className="text-sm font-medium text-zinc-500">kg</span>
                 </div>
-                <p className="text-xs text-zinc-400 mt-1">Subcutaneous & visceral fat stores.</p>
+                <p className="text-xs text-zinc-600 mt-1">Subcutaneous & visceral fat stores.</p>
               </div>
             </div>
           </div>
@@ -493,34 +492,30 @@ export const LearningSection: React.FC = () => {
 
       {/* TOPIC 5: Subcutaneous vs Visceral Fat */}
       {activeTopic === 'fat_types' && (
-        <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-6 shadow-xl space-y-4 animate-in fade-in duration-200">
+        <div className="rounded-2xl bg-orange-50/80 border-2 border-orange-300 p-6 shadow-sm space-y-4 animate-in fade-in duration-200">
           <div>
-            <span className="text-[10px] font-mono uppercase text-amber-400 font-bold">Adipose Tissue Science</span>
-            <h3 className="text-xl font-black text-white mt-0.5">Subcutaneous Fat vs Visceral Fat</h3>
-            <p className="text-xs text-zinc-400 mt-1">From the GymForge Clinical Guide</p>
+            <span className="text-[10px] font-mono uppercase text-orange-800 font-bold">Adipose Tissue Science</span>
+            <h3 className="text-xl font-black text-zinc-900 mt-0.5">Subcutaneous Fat vs Visceral Fat</h3>
+            <p className="text-xs text-zinc-600 mt-1">From the GymForge Clinical Guide</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-5 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-2">
-              <h4 className="font-bold text-white text-base flex items-center gap-2">
-                <span>Subcutaneous Fat (Pinchable)</span>
-              </h4>
-              <p className="text-xs text-zinc-400 leading-relaxed">
+            <div className="p-5 rounded-2xl bg-white border-2 border-orange-200 space-y-2">
+              <h4 className="font-bold text-zinc-900 text-base">Subcutaneous Fat (Pinchable)</h4>
+              <p className="text-xs text-zinc-600 leading-relaxed">
                 Stored immediately under your dermis. This is the soft fat on thighs, lower abdomen, and arms that you can pinch between your fingers. It serves as thermal insulation and long-term caloric buffer.
               </p>
-              <div className="text-xs text-emerald-400 pt-1 font-mono">
+              <div className="text-xs text-emerald-700 pt-1 font-mono font-bold">
                 Healthy range: 80–90% of total bodily fat
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-zinc-950 border border-amber-500/40 space-y-2">
-              <h4 className="font-bold text-amber-400 text-base flex items-center gap-2">
-                <span>Visceral Fat (Deep Organ Fat)</span>
-              </h4>
-              <p className="text-xs text-zinc-300 leading-relaxed">
+            <div className="p-5 rounded-2xl bg-white border-2 border-orange-300 space-y-2">
+              <h4 className="font-bold text-orange-800 text-base">Visceral Fat (Deep Organ Fat)</h4>
+              <p className="text-xs text-zinc-600 leading-relaxed">
                 Stored deep within the abdominal cavity wrapping vital organs (liver, pancreas, intestines). High levels cause systemic inflammation, insulin resistance, and cardiovascular strain.
               </p>
-              <div className="text-xs text-amber-400 pt-1 font-mono">
+              <div className="text-xs text-orange-700 pt-1 font-mono font-bold">
                 Optimal level: &lt; 10% of total fat mass
               </div>
             </div>
@@ -530,48 +525,48 @@ export const LearningSection: React.FC = () => {
 
       {/* TOPIC 6: Protein Science */}
       {activeTopic === 'protein' && (
-        <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-6 shadow-xl space-y-4 animate-in fade-in duration-200">
+        <div className="rounded-2xl bg-orange-50/80 border-2 border-orange-300 p-6 shadow-sm space-y-4 animate-in fade-in duration-200">
           <div>
-            <span className="text-[10px] font-mono uppercase text-amber-400 font-bold">Nutritional Physiology</span>
-            <h3 className="text-xl font-black text-white mt-0.5">Optimal Protein Intake Targets</h3>
+            <span className="text-[10px] font-mono uppercase text-orange-800 font-bold">Nutritional Physiology</span>
+            <h3 className="text-xl font-black text-zinc-900 mt-0.5">Optimal Protein Intake Targets</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
-              <span className="text-xs font-bold text-white block">Hypertrophy & Heavy Lifts</span>
-              <span className="text-xl font-black text-amber-400 font-mono mt-1 block">1.8 – 2.2 g/kg</span>
-              <p className="text-[11px] text-zinc-400 mt-1">Maximizes muscle protein synthesis and minimizes DOMS soreness.</p>
+            <div className="p-4 rounded-xl bg-white border-2 border-orange-200">
+              <span className="text-xs font-bold text-zinc-900 block">Hypertrophy & Heavy Lifts</span>
+              <span className="text-xl font-black text-orange-700 font-mono mt-1 block">1.8 – 2.2 g/kg</span>
+              <p className="text-[11px] text-zinc-600 mt-1">Maximizes muscle protein synthesis and minimizes DOMS soreness.</p>
             </div>
-            <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
-              <span className="text-xs font-bold text-white block">Aggressive Caloric Deficit</span>
-              <span className="text-xl font-black text-cyan-400 font-mono mt-1 block">2.2 – 2.5 g/kg</span>
-              <p className="text-[11px] text-zinc-400 mt-1">Prevents lean tissue breakdown during cutting phases.</p>
+            <div className="p-4 rounded-xl bg-white border-2 border-orange-200">
+              <span className="text-xs font-bold text-zinc-900 block">Aggressive Caloric Deficit</span>
+              <span className="text-xl font-black text-emerald-700 font-mono mt-1 block">2.2 – 2.5 g/kg</span>
+              <p className="text-[11px] text-zinc-600 mt-1">Prevents lean tissue breakdown during cutting phases.</p>
             </div>
-            <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
-              <span className="text-xs font-bold text-white block">Per-Meal Distribution</span>
-              <span className="text-xl font-black text-emerald-400 font-mono mt-1 block">30 – 45 g / meal</span>
-              <p className="text-[11px] text-zinc-400 mt-1">Triggers the ~3g leucine threshold needed to initiate mTOR signaling.</p>
+            <div className="p-4 rounded-xl bg-white border-2 border-orange-200">
+              <span className="text-xs font-bold text-zinc-900 block">Per-Meal Distribution</span>
+              <span className="text-xl font-black text-sky-700 font-mono mt-1 block">30 – 45 g / meal</span>
+              <p className="text-[11px] text-zinc-600 mt-1">Triggers the ~3g leucine threshold needed to initiate mTOR signaling.</p>
             </div>
           </div>
         </div>
       )}
 
-      {/* TOPIC 7: Recovery & Box Breathing (from study_topics.html) */}
+      {/* TOPIC 7: Recovery & Box Breathing - Orange Div with Green Button */}
       {activeTopic === 'recovery' && (
-        <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-6 shadow-xl space-y-5 animate-in fade-in duration-200">
+        <div className="rounded-2xl bg-orange-50/80 border-2 border-orange-300 p-6 shadow-sm space-y-5 animate-in fade-in duration-200">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <span className="text-[10px] font-mono uppercase text-amber-400 font-bold">Post-Workout Parasympathetic Reset</span>
-              <h3 className="text-xl font-black text-white mt-0.5">Box Breathing (4-4-4-4) Protocol</h3>
-              <p className="text-xs text-zinc-400 mt-1">Used by Navy SEALs and elite powerlifters to lower cortisol and accelerate recovery.</p>
+              <span className="text-[10px] font-mono uppercase text-orange-800 font-bold">Post-Workout Parasympathetic Reset</span>
+              <h3 className="text-xl font-black text-zinc-900 mt-0.5">Box Breathing (4-4-4-4) Protocol</h3>
+              <p className="text-xs text-zinc-600 mt-1">Used by Navy SEALs and elite powerlifters to lower cortisol and accelerate recovery.</p>
             </div>
 
             <button
               onClick={() => setIsBreathingActive(!isBreathingActive)}
-              className={`px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all ${
+              className={`px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-xs ${
                 isBreathingActive
-                  ? 'bg-red-500 text-white'
-                  : 'bg-gradient-to-r from-amber-500 to-orange-600 text-zinc-950 shadow-lg shadow-amber-500/20'
+                  ? 'bg-red-600 text-white'
+                  : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-600/20'
               }`}
             >
               {isBreathingActive ? 'Stop Breathing Session' : 'Start 4-Minute Session'}
@@ -579,23 +574,23 @@ export const LearningSection: React.FC = () => {
           </div>
 
           {/* Visual Breathing Circle */}
-          <div className="py-8 flex flex-col items-center justify-center bg-zinc-950 rounded-2xl border border-zinc-800/80">
+          <div className="py-8 flex flex-col items-center justify-center bg-white rounded-2xl border-2 border-orange-200">
             <div
               className={`w-40 h-40 rounded-full flex flex-col items-center justify-center border-4 transition-all duration-1000 ${
                 breathPhase === 'Inhale'
-                  ? 'scale-110 border-amber-400 bg-amber-500/10'
+                  ? 'scale-110 border-emerald-500 bg-emerald-50'
                   : breathPhase === 'Hold'
-                  ? 'scale-110 border-orange-500 bg-orange-500/15'
+                  ? 'scale-110 border-orange-500 bg-orange-50'
                   : breathPhase === 'Exhale'
-                  ? 'scale-90 border-sky-400 bg-sky-500/10'
-                  : 'scale-90 border-zinc-700 bg-zinc-900'
+                  ? 'scale-90 border-sky-500 bg-sky-50'
+                  : 'scale-90 border-zinc-300 bg-zinc-50'
               }`}
             >
-              <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">{breathPhase}</span>
-              <span className="text-4xl font-black text-white font-mono mt-1">{breathCounter}</span>
+              <span className="text-xs font-mono uppercase tracking-widest text-zinc-600 font-bold">{breathPhase}</span>
+              <span className="text-4xl font-black text-zinc-900 font-mono mt-1">{breathCounter}</span>
             </div>
 
-            <p className="text-xs text-zinc-500 font-mono mt-4">
+            <p className="text-xs text-zinc-500 font-mono mt-4 font-medium">
               Inhale 4s • Hold 4s • Exhale 4s • Pause 4s
             </p>
           </div>
@@ -604,13 +599,13 @@ export const LearningSection: React.FC = () => {
 
       {/* Fullscreen Modal for Muscle Map */}
       {isMapZoomed && (
-        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="relative max-w-5xl w-full max-h-[92vh] bg-zinc-950 border border-zinc-800 rounded-3xl overflow-hidden flex flex-col p-4 shadow-2xl">
-            <div className="flex items-center justify-between pb-3 border-b border-zinc-800 mb-2">
-              <h3 className="font-bold text-white text-base">Human Body Muscular Anatomy Reference</h3>
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="relative max-w-5xl w-full max-h-[92vh] bg-white border-2 border-orange-300 rounded-3xl overflow-hidden flex flex-col p-4 shadow-2xl">
+            <div className="flex items-center justify-between pb-3 border-b border-orange-200 mb-2">
+              <h3 className="font-bold text-zinc-900 text-base">Human Body Muscular Anatomy Reference</h3>
               <button
                 onClick={() => setIsMapZoomed(false)}
-                className="p-1 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800"
+                className="p-1 rounded-lg text-zinc-500 hover:text-zinc-900 hover:bg-orange-100 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>

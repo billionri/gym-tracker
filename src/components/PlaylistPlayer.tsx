@@ -67,7 +67,7 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
         const barWidth = canvas.width / barCount;
         for (let i = 0; i < barCount; i++) {
           const barHeight = 4 + Math.sin(Date.now() / 400 + i * 0.3) * 3;
-          ctx.fillStyle = '#3f3f46';
+          ctx.fillStyle = '#fdba74'; // orange-300
           ctx.fillRect(i * barWidth + 1, canvas.height - barHeight, barWidth - 2, barHeight);
         }
         return;
@@ -85,11 +85,10 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
         const percent = val / 255;
         const barHeight = Math.max(4, percent * canvas.height * 0.88);
 
-        // Gradient from amber-500 to orange-500
         const gradient = ctx.createLinearGradient(0, canvas.height - barHeight, 0, canvas.height);
-        gradient.addColorStop(0, '#f59e0b');
-        gradient.addColorStop(0.6, '#ea580c');
-        gradient.addColorStop(1, '#78350f');
+        gradient.addColorStop(0, '#10b981'); // emerald
+        gradient.addColorStop(0.6, '#f97316'); // orange
+        gradient.addColorStop(1, '#ea580c');
 
         ctx.fillStyle = gradient;
         ctx.fillRect(x + 1, canvas.height - barHeight, barWidth - 2, barHeight);
@@ -163,34 +162,32 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
     }
   };
 
-  // Generate Today's Custom Workout Playlist
   const handleGenerateTodayPlaylist = () => {
     let selected: TrackItem[] = [];
 
     if (generatorVibe === 'Heavy Iron') {
       selected = [
-        ALL_WORKOUT_TRACKS[1], // Heavy Foundry Drive
-        ALL_WORKOUT_TRACKS[5], // Steel Impact
-        ALL_WORKOUT_TRACKS[0], // Iron Pulse
-        ALL_WORKOUT_TRACKS[3], // Midnight Pump
-        ALL_WORKOUT_TRACKS[4], // Cybernetic Grind
+        ALL_WORKOUT_TRACKS[1],
+        ALL_WORKOUT_TRACKS[5],
+        ALL_WORKOUT_TRACKS[0],
+        ALL_WORKOUT_TRACKS[3],
+        ALL_WORKOUT_TRACKS[4],
       ];
     } else if (generatorVibe === 'Cardio Rush') {
       selected = [
-        ALL_WORKOUT_TRACKS[2], // Adrenaline Overload (145 BPM)
-        ALL_WORKOUT_TRACKS[6], // Endurance Ignition (148 BPM)
-        ALL_WORKOUT_TRACKS[0], // Iron Pulse (132 BPM)
-        ALL_WORKOUT_TRACKS[4], // Cybernetic Grind (130 BPM)
+        ALL_WORKOUT_TRACKS[2],
+        ALL_WORKOUT_TRACKS[6],
+        ALL_WORKOUT_TRACKS[0],
+        ALL_WORKOUT_TRACKS[4],
       ];
     } else if (generatorVibe === 'Night Phonk') {
       selected = [
-        ALL_WORKOUT_TRACKS[0], // Iron Pulse
-        ALL_WORKOUT_TRACKS[3], // Midnight Pump
-        ALL_WORKOUT_TRACKS[7], // Pre-Workout Mindset
-        ALL_WORKOUT_TRACKS[1], // Heavy Foundry
+        ALL_WORKOUT_TRACKS[0],
+        ALL_WORKOUT_TRACKS[3],
+        ALL_WORKOUT_TRACKS[7],
+        ALL_WORKOUT_TRACKS[1],
       ];
     } else {
-      // High Energy full shuffle
       selected = [...ALL_WORKOUT_TRACKS].sort(() => 0.5 - Math.random()).slice(0, 5);
     }
 
@@ -224,23 +221,23 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
   };
 
   return (
-    <div className="space-y-6">
-      {/* Top Banner / Generator Trigger */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-zinc-900 via-zinc-900 to-amber-950/40 border border-zinc-800 p-6 shadow-xl">
+    <div className="space-y-6 text-zinc-900">
+      {/* Top Banner - Orange Div with Green Action Buttons */}
+      <div className="relative overflow-hidden rounded-2xl bg-orange-50 border-2 border-orange-300 p-6 shadow-sm">
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="p-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400">
+              <span className="p-1.5 rounded-lg bg-orange-200 border border-orange-300 text-orange-800">
                 <Music className="w-4 h-4" />
               </span>
-              <span className="text-xs font-bold tracking-wider text-amber-400 uppercase">
+              <span className="text-xs font-bold tracking-wider text-orange-800 uppercase font-mono">
                 Dynamic Audio Engine
               </span>
             </div>
-            <h2 className="text-2xl font-black text-white tracking-tight">
+            <h2 className="text-2xl font-black text-zinc-900 tracking-tight">
               Workout Audio Forge
             </h2>
-            <p className="text-sm text-zinc-400 mt-1 max-w-xl">
+            <p className="text-sm text-zinc-600 mt-1 max-w-xl">
               Synthesized real-time electronic gym beats with adaptive BPM tempo control, rest chimes, and instant daily workout playlist generation.
             </p>
           </div>
@@ -248,7 +245,7 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
           <div className="flex flex-wrap items-center gap-2.5">
             <button
               onClick={() => setShowGenerator(!showGenerator)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-zinc-950 font-bold text-sm hover:brightness-110 shadow-lg shadow-amber-500/20 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-md shadow-emerald-600/20 transition-all cursor-pointer"
             >
               <Sparkles className="w-4 h-4" />
               <span>Make Playlist for Today</span>
@@ -256,30 +253,27 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
             {onStartWorkoutWithPlaylist && (
               <button
                 onClick={onStartWorkoutWithPlaylist}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-semibold text-sm border border-zinc-700 transition-colors"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-orange-100 text-orange-950 font-bold text-sm border-2 border-orange-300 transition-colors cursor-pointer"
               >
-                <Zap className="w-4 h-4 text-amber-400" />
+                <Zap className="w-4 h-4 text-orange-600" />
                 <span>Start Workout Now</span>
               </button>
             )}
           </div>
         </div>
-
-        {/* Ambient background glow */}
-        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
       </div>
 
-      {/* Generator Accordion / Panel */}
+      {/* Generator Accordion / Panel - Orange Div with Green Button */}
       {showGenerator && (
-        <div className="rounded-2xl bg-zinc-900 border border-amber-500/40 p-5 shadow-2xl animate-in fade-in slide-in-from-top-3 duration-200">
-          <div className="flex items-center justify-between pb-3 border-b border-zinc-800 mb-4">
+        <div className="rounded-2xl bg-orange-100/90 border-2 border-orange-400 p-5 shadow-lg animate-in fade-in slide-in-from-top-3 duration-200">
+          <div className="flex items-center justify-between pb-3 border-b border-orange-200 mb-4">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-amber-400" />
-              <h3 className="font-bold text-white text-base">Generate Today's Workout Playlist</h3>
+              <Sparkles className="w-5 h-5 text-orange-600" />
+              <h3 className="font-bold text-zinc-900 text-base">Generate Today's Workout Playlist</h3>
             </div>
             <button
               onClick={() => setShowGenerator(false)}
-              className="text-xs text-zinc-400 hover:text-white"
+              className="text-xs font-semibold text-zinc-500 hover:text-zinc-800 cursor-pointer"
             >
               Cancel
             </button>
@@ -287,7 +281,7 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-xs font-semibold text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-semibold text-orange-950 mb-1.5 uppercase tracking-wider">
                 1. Select Today's Workout Focus
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -296,10 +290,10 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
                     key={type}
                     type="button"
                     onClick={() => setGeneratorWorkoutType(type)}
-                    className={`p-2.5 rounded-xl text-xs font-semibold border text-left transition-all ${
+                    className={`p-2.5 rounded-xl text-xs font-semibold border-2 text-left transition-all cursor-pointer ${
                       generatorWorkoutType === type
-                        ? 'bg-amber-500/15 border-amber-500 text-amber-300 shadow-sm'
-                        : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:border-zinc-700'
+                        ? 'bg-emerald-600 border-emerald-600 text-white shadow-xs'
+                        : 'bg-white border-orange-200 text-zinc-700 hover:border-orange-300'
                     }`}
                   >
                     {type}
@@ -309,7 +303,7 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-semibold text-orange-950 mb-1.5 uppercase tracking-wider">
                 2. Select Audio Vibe & Tempo
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -323,24 +317,24 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
                     key={item.id}
                     type="button"
                     onClick={() => setGeneratorVibe(item.id as any)}
-                    className={`p-2.5 rounded-xl text-left border transition-all ${
+                    className={`p-2.5 rounded-xl text-left border-2 transition-all cursor-pointer ${
                       generatorVibe === item.id
-                        ? 'bg-amber-500/15 border-amber-500 text-amber-300'
-                        : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:border-zinc-700'
+                        ? 'bg-emerald-600 border-emerald-600 text-white shadow-xs'
+                        : 'bg-white border-orange-200 text-zinc-700 hover:border-orange-300'
                     }`}
                   >
-                    <div className="font-semibold text-xs text-white">{item.id}</div>
-                    <div className="text-[10px] text-zinc-400">{item.desc}</div>
+                    <div className="font-semibold text-xs">{item.id}</div>
+                    <div className={`text-[10px] ${generatorVibe === item.id ? 'text-emerald-100' : 'text-zinc-500'}`}>{item.desc}</div>
                   </button>
                 ))}
               </div>
             </div>
           </div>
 
-          <div className="flex justify-end gap-2 pt-2 border-t border-zinc-800">
+          <div className="flex justify-end gap-2 pt-2 border-t border-orange-200">
             <button
               onClick={handleGenerateTodayPlaylist}
-              className="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs uppercase tracking-wider transition-colors shadow-md"
+              className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-xs cursor-pointer"
             >
               Build & Queue Playlist
             </button>
@@ -348,44 +342,44 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
         </div>
       )}
 
-      {/* Main Interactive Music Player Deck */}
-      <div className="rounded-2xl bg-zinc-900/90 border border-zinc-800 p-6 shadow-xl">
+      {/* Main Interactive Music Player Deck - Orange Div with Green Play Button */}
+      <div className="rounded-2xl bg-orange-50/80 border-2 border-orange-300 p-6 shadow-sm">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           {/* Left: Track Info & Visualizer */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
             <div className="flex items-center gap-4">
-              <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-tr from-amber-600 to-orange-500 p-0.5 shadow-lg shadow-amber-500/20 flex-shrink-0">
-                <div className="w-full h-full bg-zinc-950 rounded-2xl flex items-center justify-center">
-                  <Disc className={`w-10 h-10 text-amber-400 ${isPlaying ? 'animate-spin' : ''}`} style={{ animationDuration: '6s' }} />
+              <div className="relative w-20 h-20 rounded-2xl bg-orange-500 p-0.5 shadow-md shadow-orange-500/30 flex-shrink-0">
+                <div className="w-full h-full bg-white rounded-2xl flex items-center justify-center">
+                  <Disc className={`w-10 h-10 text-orange-600 ${isPlaying ? 'animate-spin' : ''}`} style={{ animationDuration: '6s' }} />
                 </div>
                 {isPlaying && (
-                  <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-zinc-950" />
+                  <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white" />
                 )}
               </div>
 
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-white text-orange-900 border border-orange-300">
                     {currentTrack.genre}
                   </span>
-                  <span className="text-[11px] font-mono text-zinc-400">
+                  <span className="text-[11px] font-mono text-zinc-600 font-bold">
                     {bpm} BPM
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-white truncate mt-1">
+                <h3 className="text-xl font-bold text-zinc-900 truncate mt-1">
                   {currentTrack.title}
                 </h3>
-                <p className="text-xs text-zinc-400 truncate">
-                  {currentTrack.artist} • <span className="text-amber-400/90">{currentTrack.vibe}</span>
+                <p className="text-xs text-zinc-600 truncate">
+                  {currentTrack.artist} • <span className="text-orange-700 font-bold">{currentTrack.vibe}</span>
                 </p>
               </div>
             </div>
 
             {/* Audio Wave Visualizer */}
-            <div className="bg-zinc-950 rounded-xl p-2.5 border border-zinc-800/80">
+            <div className="bg-white rounded-xl p-2.5 border-2 border-orange-200">
               <div className="flex items-center justify-between text-[11px] text-zinc-500 font-mono mb-1.5 px-1">
                 <span>SYNTH SPECTRUM</span>
-                <span className={isPlaying ? 'text-emerald-400 font-semibold' : ''}>
+                <span className={isPlaying ? 'text-emerald-700 font-bold' : ''}>
                   {isPlaying ? 'ACTIVE FREQUENCY' : 'STANDBY'}
                 </span>
               </div>
@@ -398,12 +392,12 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
             </div>
           </div>
 
-          {/* Center: Playback Controls */}
+          {/* Center: Playback Controls - Green Play Button */}
           <div className="lg:col-span-4 flex flex-col items-center justify-center space-y-3">
             <div className="flex items-center gap-4">
               <button
                 onClick={handlePrev}
-                className="w-10 h-10 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-white hover:bg-orange-100 text-zinc-700 border border-orange-200 flex items-center justify-center transition-colors cursor-pointer"
                 title="Previous track"
               >
                 <SkipBack className="w-5 h-5" />
@@ -411,19 +405,19 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
 
               <button
                 onClick={togglePlay}
-                className="w-16 h-16 rounded-full bg-gradient-to-tr from-amber-500 to-orange-500 text-zinc-950 flex items-center justify-center shadow-lg shadow-amber-500/30 hover:scale-105 active:scale-95 transition-all"
+                className="w-16 h-16 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-600/30 hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 title={isPlaying ? 'Pause' : 'Play'}
               >
                 {isPlaying ? (
-                  <Pause className="w-8 h-8 fill-zinc-950" />
+                  <Pause className="w-8 h-8 fill-white" />
                 ) : (
-                  <Play className="w-8 h-8 fill-zinc-950 ml-1" />
+                  <Play className="w-8 h-8 fill-white ml-1" />
                 )}
               </button>
 
               <button
                 onClick={handleNext}
-                className="w-10 h-10 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-white hover:bg-orange-100 text-zinc-700 border border-orange-200 flex items-center justify-center transition-colors cursor-pointer"
                 title="Next track"
               >
                 <SkipForward className="w-5 h-5" />
@@ -431,13 +425,13 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
             </div>
 
             {/* Live BPM Slider (Tempo control) */}
-            <div className="w-full max-w-xs bg-zinc-950/70 rounded-xl p-2.5 border border-zinc-800/80">
-              <div className="flex items-center justify-between text-xs text-zinc-300 mb-1">
-                <span className="flex items-center gap-1 font-medium">
-                  <Sliders className="w-3.5 h-3.5 text-amber-400" />
+            <div className="w-full max-w-xs bg-white rounded-xl p-2.5 border-2 border-orange-200">
+              <div className="flex items-center justify-between text-xs text-zinc-800 mb-1">
+                <span className="flex items-center gap-1 font-bold">
+                  <Sliders className="w-3.5 h-3.5 text-orange-600" />
                   Cadence Speed
                 </span>
-                <span className="font-mono text-amber-400 font-bold">{bpm} BPM</span>
+                <span className="font-mono text-orange-700 font-black">{bpm} BPM</span>
               </div>
               <input
                 type="range"
@@ -445,7 +439,7 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
                 max={175}
                 value={bpm}
                 onChange={(e) => handleBpmChange(Number(e.target.value))}
-                className="w-full accent-amber-500 h-1.5 bg-zinc-800 rounded-lg cursor-pointer"
+                className="w-full accent-emerald-600 h-1.5 bg-orange-100 rounded-lg cursor-pointer"
               />
               <div className="flex justify-between text-[10px] text-zinc-500 font-mono mt-1">
                 <span>90 (Warmup)</span>
@@ -458,20 +452,20 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
           {/* Right: Volume & Preset Shortcuts */}
           <div className="lg:col-span-3 flex flex-col space-y-3">
             {/* Volume Control */}
-            <div className="bg-zinc-950/70 rounded-xl p-3 border border-zinc-800/80">
-              <div className="flex items-center justify-between text-xs text-zinc-400 mb-1.5">
-                <span className="font-semibold text-zinc-300">Volume</span>
-                <span className="font-mono">{Math.round(volume * 100)}%</span>
+            <div className="bg-white rounded-xl p-3 border-2 border-orange-200">
+              <div className="flex items-center justify-between text-xs text-zinc-700 mb-1.5">
+                <span className="font-bold text-zinc-900">Volume</span>
+                <span className="font-mono font-bold text-orange-700">{Math.round(volume * 100)}%</span>
               </div>
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleToggleMute}
-                  className="text-zinc-400 hover:text-white transition-colors"
+                  className="text-zinc-600 hover:text-zinc-900 transition-colors cursor-pointer"
                 >
                   {isMuted || volume === 0 ? (
-                    <VolumeX className="w-4 h-4 text-red-400" />
+                    <VolumeX className="w-4 h-4 text-red-500" />
                   ) : (
-                    <Volume2 className="w-4 h-4 text-zinc-300" />
+                    <Volume2 className="w-4 h-4 text-emerald-700" />
                   )}
                 </button>
                 <input
@@ -481,14 +475,14 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
                   step={0.05}
                   value={isMuted ? 0 : volume}
                   onChange={(e) => handleVolumeChange(Number(e.target.value))}
-                  className="w-full accent-amber-500 h-1.5 bg-zinc-800 rounded-lg cursor-pointer"
+                  className="w-full accent-emerald-600 h-1.5 bg-orange-100 rounded-lg cursor-pointer"
                 />
               </div>
             </div>
 
             {/* Quick Playlist Switcher */}
             <div className="flex flex-col gap-1.5">
-              <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider px-1">
+              <span className="text-[11px] font-bold text-orange-950 uppercase tracking-wider px-1">
                 Curated Gym Presets
               </span>
               <div className="grid grid-cols-2 gap-1.5">
@@ -496,12 +490,12 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
                   <button
                     key={p.id}
                     onClick={() => handleLoadPreset(p)}
-                    className="p-2 rounded-lg bg-zinc-800/60 hover:bg-zinc-800 border border-zinc-700/60 hover:border-amber-500/40 text-left transition-all"
+                    className="p-2 rounded-lg bg-white hover:bg-orange-100 border border-orange-200 text-left transition-all cursor-pointer"
                   >
-                    <div className="font-semibold text-[11px] text-zinc-200 truncate">
+                    <div className="font-bold text-[11px] text-zinc-900 truncate">
                       {p.name.replace("Today's ", "")}
                     </div>
-                    <div className="text-[9px] text-zinc-400 truncate">
+                    <div className="text-[9px] text-zinc-500 truncate">
                       {p.tracks.length} tracks • {p.targetWorkout}
                     </div>
                   </button>
@@ -512,19 +506,19 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
         </div>
       </div>
 
-      {/* Playlist Track Queue */}
-      <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-5 shadow-lg">
-        <div className="flex items-center justify-between pb-4 border-b border-zinc-800">
+      {/* Playlist Track Queue - Orange Div with Green Button */}
+      <div className="rounded-2xl bg-orange-50/80 border-2 border-orange-300 p-5 shadow-sm">
+        <div className="flex items-center justify-between pb-4 border-b border-orange-200">
           <div>
-            <h3 className="font-bold text-white text-base">Active Workout Tracklist</h3>
-            <p className="text-xs text-zinc-400">
+            <h3 className="font-bold text-zinc-900 text-base">Active Workout Tracklist</h3>
+            <p className="text-xs text-zinc-500">
               {playlist.length} track{playlist.length > 1 ? 's' : ''} queued for your session
             </p>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowAddCustomModal(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 border border-zinc-700 transition-colors"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white shadow-xs transition-colors cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Track</span>
@@ -532,7 +526,7 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
           </div>
         </div>
 
-        <div className="divide-y divide-zinc-800/60 mt-2">
+        <div className="divide-y divide-orange-100 mt-2 bg-white rounded-xl border border-orange-200">
           {playlist.map((track, idx) => {
             const isCurrent = track.id === currentTrack.id;
             return (
@@ -544,45 +538,45 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
                     audioEngine.start(track.synthTheme, track.bpm);
                   }
                 }}
-                className={`flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all ${
+                className={`flex items-center justify-between p-3 cursor-pointer transition-all ${
                   isCurrent
-                    ? 'bg-amber-500/10 border border-amber-500/30'
-                    : 'hover:bg-zinc-800/50'
+                    ? 'bg-orange-100/70 border-l-4 border-l-orange-500'
+                    : 'hover:bg-orange-50/60'
                 }`}
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <span className="w-6 text-center font-mono text-xs text-zinc-500">
+                  <span className="w-6 text-center font-mono text-xs text-zinc-400">
                     {isCurrent && isPlaying ? (
-                      <span className="w-2 h-2 rounded-full bg-amber-400 inline-block animate-ping" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block animate-ping" />
                     ) : (
                       idx + 1
                     )}
                   </span>
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className={`font-semibold text-sm truncate ${isCurrent ? 'text-amber-400' : 'text-zinc-200'}`}>
+                      <span className={`font-bold text-sm truncate ${isCurrent ? 'text-orange-900' : 'text-zinc-900'}`}>
                         {track.title}
                       </span>
                       {isCurrent && (
-                        <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-amber-500 text-zinc-950">
+                        <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-emerald-600 text-white">
                           PLAYING
                         </span>
                       )}
                     </div>
-                    <div className="text-xs text-zinc-400 truncate">
+                    <div className="text-xs text-zinc-500 truncate">
                       {track.artist}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3 flex-shrink-0">
-                  <span className="hidden sm:inline-block text-[11px] font-bold px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">
+                  <span className="hidden sm:inline-block text-[11px] font-bold px-2 py-0.5 rounded bg-orange-100 text-orange-900 border border-orange-200">
                     {track.genre}
                   </span>
-                  <span className="font-mono text-xs text-amber-400/90">
+                  <span className="font-mono text-xs text-orange-800 font-bold">
                     {track.bpm} BPM
                   </span>
-                  <span className="font-mono text-xs text-zinc-500">
+                  <span className="font-mono text-xs text-zinc-400">
                     {Math.floor(track.durationSeconds / 60)}:
                     {(track.durationSeconds % 60).toString().padStart(2, '0')}
                   </span>
@@ -595,53 +589,53 @@ export const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
 
       {/* Add Custom Track Modal */}
       {showAddCustomModal && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 max-w-md w-full shadow-2xl">
-            <h3 className="text-lg font-bold text-white mb-3">Add Track to Workout Playlist</h3>
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white border-2 border-orange-300 rounded-2xl p-6 max-w-md w-full shadow-2xl text-zinc-900">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3">Add Track to Workout Playlist</h3>
             <form onSubmit={handleAddCustomTrack} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-zinc-300 mb-1">Track Title</label>
+                <label className="block text-xs font-semibold text-zinc-700 mb-1">Track Title</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Iron Will"
                   value={customTitle}
                   onChange={(e) => setCustomTitle(e.target.value)}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                  className="w-full bg-orange-50/50 border border-orange-300 rounded-xl px-3.5 py-2 text-sm text-zinc-900 focus:outline-none focus:border-emerald-600"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-zinc-300 mb-1">Artist / Source</label>
+                <label className="block text-xs font-semibold text-zinc-700 mb-1">Artist / Source</label>
                 <input
                   type="text"
                   placeholder="e.g. Gym Sound Lab"
                   value={customArtist}
                   onChange={(e) => setCustomArtist(e.target.value)}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                  className="w-full bg-orange-50/50 border border-orange-300 rounded-xl px-3.5 py-2 text-sm text-zinc-900 focus:outline-none focus:border-emerald-600"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-zinc-300 mb-1">Cadence BPM: {customBpm}</label>
+                <label className="block text-xs font-semibold text-zinc-700 mb-1">Cadence BPM: {customBpm}</label>
                 <input
                   type="range"
                   min={100}
                   max={170}
                   value={customBpm}
                   onChange={(e) => setCustomBpm(Number(e.target.value))}
-                  className="w-full accent-amber-500 h-1.5 bg-zinc-800 rounded-lg cursor-pointer"
+                  className="w-full accent-emerald-600 h-1.5 bg-orange-100 rounded-lg cursor-pointer"
                 />
               </div>
               <div className="flex justify-end gap-2 pt-2">
                 <button
                   type="button"
                   onClick={() => setShowAddCustomModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-zinc-400 hover:text-white"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-zinc-600 hover:text-zinc-900 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-xl bg-amber-500 text-zinc-950 font-bold text-xs uppercase tracking-wider hover:bg-amber-400"
+                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider shadow-xs cursor-pointer"
                 >
                   Add Track
                 </button>

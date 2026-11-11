@@ -1,0 +1,107 @@
+name: Build Android APK & Publish Release
+
+on:
+  push:
+    branches: [main, master]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Version tag for APK release'
+        required: false
+        default: 'v1.0.0'
+
+jobs:
+  build-apk:
+    name: Build GymForge Android APK
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Web Dependencies & Build Bundle
+        run: |
+          npm ci || npm install
+          npm run build
+          node scripts/copy-dist-to-android.cjs
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Create Android Debug Keystore
+        run: |
+          mkdir -p ~/.android
+          keytool -genkey -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US" || true
+
+      - name: Make Gradlew Executable & Build APK
+        run: |
+          cd android
+          gradle wrapper --gradle-version 8.2 || true
+          chmod +x gradlew || true
+          ./gradlew assembleRelease --stacktrace
+
+      - name: Locate & Rename APK
+        run: |
+          mkdir -p release-apk
+          find android/app/build/outputs/apk/ -name "*.apk" -exec cp {} release-apk/GymForge-v1.0.0.apk \;
+          ls -la release-apk/
+
+      - name: Upload APK as GitHub Actions Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GymForge-Android-APK
+          path: release-apk/GymForge-v1.0.0.apk
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Create or Update GitHub Release with APK
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.release_version || 'v1.0.0' }}
+          name: GymForge Android APK ${{ github.event.inputs.release_version || 'v1.0.0' }}
+          body: |
+            ## 🏋️ GymForge Android APK Release
+            
+            Download the official **GymForge.apk** below and install it directly on your Android phone!
+            
+            ### What's Included:
+            - **100 Gym Exercises** with images & technique guides
+            - **Live Workout Tracker** with automatic rest timer beeps
+            - **Workout Audio Forge** with synthesized phonk & heavy iron workout playlists
+            - **Streak Engine & Notifications** to forge consistency
+            - **Custom Athlete Diet Plan** & 8-glass water tracker
+            - **Muscular Anatomy Map** & physiological body composition calculators
+            
+            ### How to Install on Android:
+            1. Download `GymForge-v1.0.0.apk` from the Assets below.
+            2. Tap the downloaded file on your Android device.
+            3. If prompted, allow *"Install from unknown sources"* for your browser or file manager.
+            4. Tap **Install** & start forging iron!
+          files: release-apk/GymForge-v1.0.0.apk
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

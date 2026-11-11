@@ -237,23 +237,23 @@ export const DietPlan: React.FC<{
   };
 
   return (
-    <div className="space-y-6">
-      {/* Top Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-zinc-900 via-zinc-900 to-amber-950/40 border border-zinc-800 p-6 shadow-xl">
+    <div className="space-y-6 text-zinc-900">
+      {/* Top Banner - Orange Div with Green Button */}
+      <div className="relative overflow-hidden rounded-2xl bg-orange-50 border-2 border-orange-300 p-6 shadow-sm">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="p-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400">
+              <span className="p-1.5 rounded-lg bg-orange-200 border border-orange-300 text-orange-800">
                 <Utensils className="w-4 h-4" />
               </span>
-              <span className="text-xs font-bold tracking-wider text-amber-400 uppercase font-mono">
+              <span className="text-xs font-bold tracking-wider text-orange-800 uppercase font-mono">
                 GymForge Nutrition Architecture
               </span>
             </div>
-            <h2 className="text-2xl font-black text-white tracking-tight">
+            <h2 className="text-2xl font-black text-zinc-900 tracking-tight">
               Personalized Athlete Diet Plan
             </h2>
-            <p className="text-sm text-zinc-400 mt-1 max-w-xl">
+            <p className="text-sm text-zinc-600 mt-1 max-w-xl">
               Precision macro ratios, daily meal timeline, and hydration tracking directly from the GymForge Study Topics knowledge vault.
             </p>
           </div>
@@ -261,7 +261,7 @@ export const DietPlan: React.FC<{
           {onNavigateToShop && (
             <button
               onClick={onNavigateToShop}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-zinc-950 font-black text-xs uppercase tracking-wider hover:brightness-110 shadow-lg shadow-amber-500/20 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider shadow-md shadow-emerald-600/20 transition-all cursor-pointer"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>Shop Diet Groceries</span>
@@ -272,14 +272,14 @@ export const DietPlan: React.FC<{
 
       {/* Plan Configuration Deck */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left: Preferences & Goal Config (5 cols) */}
+        {/* Left: Preferences & Goal Config (5 cols) - Orange Div */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-5 shadow-lg space-y-4">
-            <h3 className="font-bold text-white text-base">Plan Settings</h3>
+          <div className="rounded-2xl bg-orange-50/80 border-2 border-orange-300 p-5 shadow-sm space-y-4">
+            <h3 className="font-bold text-zinc-900 text-base">Plan Settings</h3>
 
-            {/* Goal Toggle */}
+            {/* Goal Toggle - Green Button when active */}
             <div>
-              <label className="block text-xs font-semibold text-zinc-400 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-semibold text-orange-950 mb-1.5 uppercase tracking-wider">
                 1. Fitness Objective
               </label>
               <div className="grid grid-cols-3 gap-1.5">
@@ -291,22 +291,22 @@ export const DietPlan: React.FC<{
                   <button
                     key={g.id}
                     onClick={() => setGoal(g.id as any)}
-                    className={`p-2.5 rounded-xl border text-center transition-all ${
+                    className={`p-2.5 rounded-xl border-2 text-center transition-all cursor-pointer ${
                       goal === g.id
-                        ? 'bg-amber-500/15 border-amber-500 text-amber-300 font-bold shadow-sm'
-                        : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:border-zinc-700'
+                        ? 'bg-emerald-600 border-emerald-600 text-white font-bold shadow-xs'
+                        : 'bg-white border-orange-200 text-zinc-700 hover:border-orange-300'
                     }`}
                   >
                     <div className="text-xs font-semibold">{g.label}</div>
-                    <div className="text-[10px] font-mono opacity-80">{g.sub}</div>
+                    <div className={`text-[10px] font-mono ${goal === g.id ? 'text-emerald-100' : 'text-zinc-500'}`}>{g.sub}</div>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Dietary Style */}
+            {/* Dietary Style - Green Button when active */}
             <div>
-              <label className="block text-xs font-semibold text-zinc-400 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-semibold text-orange-950 mb-1.5 uppercase tracking-wider">
                 2. Dietary Preference
               </label>
               <div className="grid grid-cols-3 gap-1.5">
@@ -318,43 +318,43 @@ export const DietPlan: React.FC<{
                   <button
                     key={d.id}
                     onClick={() => setDietaryPref(d.id as any)}
-                    className={`p-2.5 rounded-xl border text-center transition-all ${
+                    className={`p-2.5 rounded-xl border-2 text-center transition-all cursor-pointer ${
                       dietaryPref === d.id
-                        ? 'bg-amber-500/15 border-amber-500 text-amber-300 font-bold'
-                        : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:border-zinc-700'
+                        ? 'bg-emerald-600 border-emerald-600 text-white font-bold shadow-xs'
+                        : 'bg-white border-orange-200 text-zinc-700 hover:border-orange-300'
                     }`}
                   >
                     <div className="text-xs font-semibold">{d.label}</div>
-                    <div className="text-[9px] text-zinc-500 truncate">{d.desc}</div>
+                    <div className={`text-[9px] truncate ${dietaryPref === d.id ? 'text-emerald-100' : 'text-zinc-500'}`}>{d.desc}</div>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Target Calorie Readout */}
-            <div className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 flex items-center justify-between">
+            <div className="p-3.5 rounded-xl bg-white border-2 border-orange-200 flex items-center justify-between">
               <div>
                 <span className="text-[10px] font-mono text-zinc-500 uppercase">Target Daily Energy</span>
-                <div className="text-xl font-black text-amber-400 font-mono">
+                <div className="text-xl font-black text-orange-700 font-mono">
                   {targetCalories} kcal
                 </div>
               </div>
-              <div className="text-right text-[11px] font-mono text-zinc-400">
-                Body weight: <span className="text-white font-bold">{weightKg} kg</span>
+              <div className="text-right text-[11px] font-mono text-zinc-600">
+                Body weight: <span className="text-zinc-900 font-bold">{weightKg} kg</span>
               </div>
             </div>
           </div>
 
-          {/* Daily Hydration Glass Tracker (from study_topics.html) */}
-          <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-5 shadow-lg space-y-3">
+          {/* Daily Hydration Glass Tracker - Orange Div with Green Button */}
+          <div className="rounded-2xl bg-orange-50/80 border-2 border-orange-300 p-5 shadow-sm space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 border border-sky-300 flex items-center justify-center">
                   <Droplets className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-white text-sm">Daily Hydration Log</h4>
-                  <p className="text-[10px] text-zinc-400 font-mono">
+                  <h4 className="font-bold text-zinc-900 text-sm">Daily Hydration Log</h4>
+                  <p className="text-[10px] text-zinc-500 font-mono">
                     {waterGlasses * 250} ml / 2,000 ml goal
                   </p>
                 </div>
@@ -362,7 +362,7 @@ export const DietPlan: React.FC<{
 
               <button
                 onClick={() => handleUpdateWater(0)}
-                className="text-[11px] text-zinc-500 hover:text-zinc-300 flex items-center gap-1"
+                className="text-[11px] text-zinc-500 hover:text-zinc-800 flex items-center gap-1 cursor-pointer font-medium"
                 title="Reset water log"
               >
                 <RotateCcw className="w-3 h-3" />
@@ -379,13 +379,13 @@ export const DietPlan: React.FC<{
                     key={idx}
                     type="button"
                     onClick={() => handleUpdateWater(isFilled ? idx : idx + 1)}
-                    className={`py-3 rounded-xl border flex flex-col items-center justify-center transition-all ${
+                    className={`py-3 rounded-xl border-2 flex flex-col items-center justify-center transition-all cursor-pointer ${
                       isFilled
-                        ? 'bg-sky-500/20 border-sky-400 text-sky-300 shadow-sm shadow-sky-500/20'
-                        : 'bg-zinc-950 border-zinc-800 text-zinc-600 hover:border-zinc-700'
+                        ? 'bg-sky-500 border-sky-600 text-white shadow-xs'
+                        : 'bg-white border-orange-200 text-zinc-400 hover:border-orange-300'
                     }`}
                   >
-                    <Droplets className={`w-4 h-4 ${isFilled ? 'fill-sky-400' : ''}`} />
+                    <Droplets className={`w-4 h-4 ${isFilled ? 'fill-white' : ''}`} />
                     <span className="text-[9px] font-mono mt-1 font-bold">
                       {isFilled ? '250ml' : `G${idx + 1}`}
                     </span>
@@ -394,11 +394,11 @@ export const DietPlan: React.FC<{
               })}
             </div>
 
-            <div className="flex justify-between items-center text-[11px] text-zinc-400 pt-1">
-              <span>{waterGlasses >= 8 ? '✓ Optimum Hydration Reached!' : `${8 - waterGlasses} glasses remaining`}</span>
+            <div className="flex justify-between items-center text-[11px] text-zinc-600 pt-1">
+              <span className="font-medium">{waterGlasses >= 8 ? '✓ Optimum Hydration Reached!' : `${8 - waterGlasses} glasses remaining`}</span>
               <button
                 onClick={() => handleUpdateWater(waterGlasses + 1)}
-                className="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-sky-300"
+                className="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white shadow-xs cursor-pointer"
               >
                 +1 Glass (250ml)
               </button>
@@ -408,73 +408,73 @@ export const DietPlan: React.FC<{
 
         {/* Right: Macro Targets & Meal Timeline (7 cols) */}
         <div className="lg:col-span-7 space-y-4">
-          {/* Macro Breakdown Header */}
+          {/* Macro Breakdown Header - Orange Divs */}
           <div className="grid grid-cols-3 gap-3">
-            <div className="p-3.5 rounded-2xl bg-zinc-900 border border-zinc-800">
-              <span className="text-[10px] font-mono uppercase text-zinc-500">Protein</span>
-              <div className="text-xl font-black text-white font-mono mt-0.5">
+            <div className="p-3.5 rounded-2xl bg-orange-50/80 border-2 border-orange-300 shadow-2xs">
+              <span className="text-[10px] font-mono uppercase text-orange-800 font-bold">Protein</span>
+              <div className="text-xl font-black text-zinc-900 font-mono mt-0.5">
                 {proteinG}g
               </div>
-              <span className="text-[10px] text-emerald-400 font-mono">
+              <span className="text-[10px] text-emerald-700 font-mono font-bold">
                 {Math.round((proteinG * 4 / targetCalories) * 100)}% of intake
               </span>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-zinc-900 border border-zinc-800">
-              <span className="text-[10px] font-mono uppercase text-zinc-500">Complex Carbs</span>
-              <div className="text-xl font-black text-white font-mono mt-0.5">
+            <div className="p-3.5 rounded-2xl bg-orange-50/80 border-2 border-orange-300 shadow-2xs">
+              <span className="text-[10px] font-mono uppercase text-orange-800 font-bold">Complex Carbs</span>
+              <div className="text-xl font-black text-zinc-900 font-mono mt-0.5">
                 {carbsG}g
               </div>
-              <span className="text-[10px] text-amber-400 font-mono">
+              <span className="text-[10px] text-orange-700 font-mono font-bold">
                 {Math.round((carbsG * 4 / targetCalories) * 100)}% of intake
               </span>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-zinc-900 border border-zinc-800">
-              <span className="text-[10px] font-mono uppercase text-zinc-500">Healthy Fats</span>
-              <div className="text-xl font-black text-white font-mono mt-0.5">
+            <div className="p-3.5 rounded-2xl bg-orange-50/80 border-2 border-orange-300 shadow-2xs">
+              <span className="text-[10px] font-mono uppercase text-orange-800 font-bold">Healthy Fats</span>
+              <div className="text-xl font-black text-zinc-900 font-mono mt-0.5">
                 {fatsG}g
               </div>
-              <span className="text-[10px] text-cyan-400 font-mono">
+              <span className="text-[10px] text-sky-700 font-mono font-bold">
                 {Math.round((fatsG * 9 / targetCalories) * 100)}% of intake
               </span>
             </div>
           </div>
 
-          {/* Meals Timeline */}
-          <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-5 shadow-xl space-y-3">
-            <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
-              <h3 className="font-bold text-white text-base">Daily Nutrition Timeline</h3>
-              <span className="text-xs font-mono text-amber-400">
+          {/* Meals Timeline - Orange Div */}
+          <div className="rounded-2xl bg-orange-50/80 border-2 border-orange-300 p-5 shadow-sm space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b border-orange-200">
+              <h3 className="font-bold text-zinc-900 text-base">Daily Nutrition Timeline</h3>
+              <span className="text-xs font-mono font-bold text-orange-800">
                 {meals.length} Scheduled Meals
               </span>
             </div>
 
-            <div className="divide-y divide-zinc-800/60">
+            <div className="divide-y divide-orange-200/70">
               {meals.map((meal, idx) => (
                 <div key={idx} className="py-3.5 flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3">
                     <div className="w-16 flex-shrink-0">
-                      <span className="text-xs font-mono font-bold text-amber-400 block">
+                      <span className="text-xs font-mono font-bold text-orange-800 block">
                         {meal.time}
                       </span>
-                      <span className="text-[10px] text-zinc-500 font-medium uppercase">
+                      <span className="text-[10px] text-zinc-500 font-semibold uppercase">
                         {meal.name}
                       </span>
                     </div>
 
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-white leading-relaxed">
+                      <p className="text-sm font-semibold text-zinc-900 leading-relaxed">
                         {meal.foods}
                       </p>
                     </div>
                   </div>
 
                   <div className="text-right flex-shrink-0 font-mono">
-                    <span className="text-xs font-bold text-zinc-200 block">
+                    <span className="text-xs font-bold text-zinc-800 block">
                       {meal.calories} kcal
                     </span>
-                    <span className="text-[10px] text-emerald-400">
+                    <span className="text-[10px] text-emerald-700 font-bold">
                       {meal.proteinG}g P
                     </span>
                   </div>
@@ -483,17 +483,17 @@ export const DietPlan: React.FC<{
             </div>
           </div>
 
-          {/* GymForge Nutrition Rules (from study_topics.html) */}
-          <div className="rounded-2xl bg-zinc-950 border border-zinc-800/80 p-4 space-y-2">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" />
+          {/* GymForge Nutrition Rules - Orange Div */}
+          <div className="rounded-2xl bg-orange-100/70 border-2 border-orange-300 p-4 space-y-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-orange-900 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-orange-600" />
               <span>GymForge Nutrition Iron Laws</span>
             </h4>
-            <ul className="text-xs text-zinc-400 space-y-1.5 leading-relaxed">
-              <li>• <b className="text-zinc-200">Protein with every meal:</b> Protects muscle tissue and boosts thermic effect of food.</li>
-              <li>• <b className="text-zinc-200">Hydration target:</b> Aim for 3–4 litres of clean water daily; begin every meal with one tall glass.</li>
-              <li>• <b className="text-zinc-200">Anabolic window:</b> Consume 25–30g rapid-digesting protein within 45 minutes post-workout for peak protein synthesis.</li>
-              <li>• <b className="text-zinc-200">Consistency:</b> Meal prep on Sundays eliminates weekday takeout temptations.</li>
+            <ul className="text-xs text-zinc-700 space-y-1.5 leading-relaxed">
+              <li>• <b className="text-zinc-900">Protein with every meal:</b> Protects muscle tissue and boosts thermic effect of food.</li>
+              <li>• <b className="text-zinc-900">Hydration target:</b> Aim for 3–4 litres of clean water daily; begin every meal with one tall glass.</li>
+              <li>• <b className="text-zinc-900">Anabolic window:</b> Consume 25–30g rapid-digesting protein within 45 minutes post-workout for peak protein synthesis.</li>
+              <li>• <b className="text-zinc-900">Consistency:</b> Meal prep on Sundays eliminates weekday takeout temptations.</li>
             </ul>
           </div>
         </div>

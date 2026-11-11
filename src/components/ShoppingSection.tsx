@@ -84,63 +84,61 @@ export const ShoppingSection: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-zinc-900 via-zinc-900 to-amber-950/40 border border-zinc-800 p-6 shadow-xl">
+      {/* Header Banner - Orange Div with Green Button */}
+      <div className="relative overflow-hidden rounded-2xl bg-orange-50 border-2 border-orange-300 p-6 shadow-sm text-zinc-900">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="p-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400">
+              <span className="p-1.5 rounded-lg bg-orange-200 border border-orange-300 text-orange-800">
                 <ShoppingBag className="w-4 h-4" />
               </span>
-              <span className="text-xs font-bold tracking-wider text-amber-400 uppercase font-mono">
+              <span className="text-xs font-bold tracking-wider text-orange-800 uppercase font-mono">
                 GymForge Official Store & Checklist • All Prices in ₹ (INR)
               </span>
             </div>
-            <h2 className="text-2xl font-black text-white tracking-tight flex items-center gap-2">
+            <h2 className="text-2xl font-black text-zinc-900 tracking-tight flex items-center gap-2">
               <span>Iron Gear, Supplements & Groceries</span>
-              <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">
                 ₹ Best Rates
               </span>
             </h2>
-            <p className="text-sm text-zinc-400 mt-1 max-w-xl">
-              Equip your home gym with affordable heavy-duty dumbbells starting from only <strong className="text-amber-400 font-semibold">₹399</strong>, plus top-tier lifting straps, whey isolate, and bulk meal prep staples.
+            <p className="text-sm text-zinc-600 mt-1 max-w-xl">
+              Equip your home gym with affordable heavy-duty dumbbells starting from only <strong className="text-orange-700 font-bold">₹399</strong>, plus top-tier lifting straps, whey isolate, and bulk meal prep staples.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowDrawer(true)}
-              className="relative flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-zinc-950 font-black text-xs uppercase tracking-wider hover:brightness-110 shadow-lg shadow-amber-500/20 transition-all cursor-pointer"
+              className="relative flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider shadow-md shadow-emerald-600/20 transition-all cursor-pointer"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>Shopping List ({shoppingCart.length})</span>
               {shoppingCart.length > 0 && (
-                <span className="w-2 h-2 rounded-full bg-zinc-950 animate-ping absolute -top-1 -right-1" />
+                <span className="w-2.5 h-2.5 rounded-full bg-orange-400 border border-white animate-ping absolute -top-1 -right-1" />
               )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* SPECIAL FEATURED SPOTLIGHT: LOW PRICE DUMBBELL DEALS */}
-      <div className="rounded-2xl border border-amber-500/30 bg-gradient-to-b from-amber-500/10 via-zinc-900 to-zinc-900 p-5 shadow-lg relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
-        
+      {/* SPECIAL FEATURED SPOTLIGHT: LOW PRICE DUMBBELL DEALS - Orange Div with Green Buttons */}
+      <div className="rounded-2xl border-2 border-orange-300 bg-orange-100/70 p-5 shadow-sm relative overflow-hidden text-zinc-900">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
           <div className="flex items-center gap-2.5">
-            <span className="p-2 rounded-xl bg-amber-500 text-zinc-950 shadow-md">
-              <Flame className="w-5 h-5 fill-zinc-950 stroke-[2.5]" />
+            <span className="p-2 rounded-xl bg-orange-500 text-white shadow-md">
+              <Flame className="w-5 h-5 fill-white stroke-[2.5]" />
             </span>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-lg font-black text-white uppercase tracking-tight">
+                <h3 className="text-lg font-black text-zinc-900 uppercase tracking-tight">
                   ⚡ Low Price Dumbbell Specials
                 </h3>
-                <span className="px-2 py-0.5 rounded-md bg-red-500/20 text-red-400 border border-red-500/40 text-[10px] font-black uppercase tracking-wider">
+                <span className="px-2 py-0.5 rounded-md bg-red-100 text-red-700 border border-red-300 text-[10px] font-black uppercase tracking-wider">
                   Up to 67% OFF
                 </span>
               </div>
-              <p className="text-xs text-zinc-400 mt-0.5">
+              <p className="text-xs text-zinc-600 mt-0.5">
                 Heavy-duty home gym dumbbells at factory-direct discounted prices in Rupees (₹).
               </p>
             </div>
@@ -148,24 +146,24 @@ export const ShoppingSection: React.FC = () => {
 
           <button
             onClick={addAllDumbbellDeals}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-800 hover:bg-amber-500/20 hover:border-amber-500/40 text-amber-400 border border-zinc-700 text-xs font-bold transition-all self-start sm:self-auto cursor-pointer"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-sm transition-all self-start sm:self-auto cursor-pointer"
           >
             <Dumbbell className="w-3.5 h-3.5" />
             <span>Add All Dumbbells to List</span>
           </button>
         </div>
 
-        {/* 4 Dumbbells Quick Grid */}
+        {/* 4 Dumbbells Quick Grid - Orange Cards with Green Buttons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
           {dumbbellDeals.map((db) => {
             const inCart = shoppingCart.some((i) => i.id === db.id);
             return (
               <div
                 key={db.id}
-                className="rounded-xl border border-zinc-800 bg-zinc-950/80 p-3 flex flex-col justify-between hover:border-amber-500/40 transition-all group"
+                className="rounded-xl border-2 border-orange-200 bg-white p-3 flex flex-col justify-between hover:border-orange-400 transition-all group shadow-2xs"
               >
                 <div>
-                  <div className="relative h-28 w-full rounded-lg overflow-hidden bg-zinc-900 mb-2.5">
+                  <div className="relative h-28 w-full rounded-lg overflow-hidden bg-zinc-100 mb-2.5">
                     <img
                       src={db.imageUrl}
                       alt={db.name}
@@ -174,20 +172,20 @@ export const ShoppingSection: React.FC = () => {
                     <span className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-red-600 text-white font-mono font-black text-[9px]">
                       {db.discountPercent}% OFF
                     </span>
-                    <span className="absolute bottom-1.5 right-1.5 px-2 py-0.5 rounded bg-zinc-950/90 text-amber-400 font-mono font-black text-xs border border-zinc-800">
+                    <span className="absolute bottom-1.5 right-1.5 px-2 py-0.5 rounded bg-white/95 text-orange-900 font-mono font-black text-xs border border-orange-200 shadow-2xs">
                       ₹{db.price.toLocaleString('en-IN')}
                     </span>
                   </div>
 
-                  <h4 className="font-bold text-white text-xs line-clamp-2 leading-snug">
+                  <h4 className="font-bold text-zinc-900 text-xs line-clamp-2 leading-snug">
                     {db.name}
                   </h4>
                   <div className="flex items-center gap-2 mt-1.5">
-                    <span className="text-base font-black text-white font-mono">
+                    <span className="text-base font-black text-zinc-900 font-mono">
                       ₹{db.price.toLocaleString('en-IN')}
                     </span>
                     {db.originalPrice && (
-                      <span className="text-xs text-zinc-500 line-through font-mono">
+                      <span className="text-xs text-zinc-400 line-through font-mono">
                         ₹{db.originalPrice.toLocaleString('en-IN')}
                       </span>
                     )}
@@ -198,14 +196,14 @@ export const ShoppingSection: React.FC = () => {
                   onClick={() => toggleCartItem(db)}
                   className={`mt-3 w-full py-1.5 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                     inCart
-                      ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                      : 'bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black'
+                      ? 'bg-emerald-100 text-emerald-800 border border-emerald-400 font-black'
+                      : 'bg-emerald-600 hover:bg-emerald-500 text-white font-black shadow-xs'
                   }`}
                 >
                   {inCart ? (
                     <>
                       <Check className="w-3.5 h-3.5" />
-                      <span>Added</span>
+                      <span>Added to List</span>
                     </>
                   ) : (
                     <>
@@ -235,8 +233,8 @@ export const ShoppingSection: React.FC = () => {
               onClick={() => setSelectedCategory(tab.id as CategoryFilter)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                 selectedCategory === tab.id
-                  ? 'bg-amber-500 text-zinc-950 shadow-md font-black'
-                  : 'bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800'
+                  ? 'bg-emerald-600 text-white shadow-sm font-black'
+                  : 'bg-orange-50 text-orange-950 hover:bg-orange-100 border border-orange-200'
               }`}
             >
               {tab.label}
@@ -245,28 +243,28 @@ export const ShoppingSection: React.FC = () => {
         </div>
 
         <div className="relative w-full sm:w-64">
-          <Search className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-orange-600 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search dumbbell, whey, straps..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-zinc-900 border border-zinc-800 rounded-xl pl-10 pr-3.5 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-500"
+            className="w-full bg-white border-2 border-orange-200 rounded-xl pl-10 pr-3.5 py-2 text-xs text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-orange-500"
           />
         </div>
       </div>
 
-      {/* Product Catalog Grid */}
+      {/* Product Catalog Grid - Orange Divs with Green Action Buttons */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {filteredItems.map((item) => {
           const inCart = shoppingCart.some((i) => i.id === item.id);
           return (
             <div
               key={item.id}
-              className="rounded-2xl border border-zinc-800/80 bg-zinc-900/90 hover:border-amber-500/50 transition-all overflow-hidden flex flex-col justify-between group shadow-sm"
+              className="rounded-2xl border-2 border-orange-200 bg-orange-50/70 hover:border-orange-400 transition-all overflow-hidden flex flex-col justify-between group shadow-2xs text-zinc-900"
             >
               {/* Product Image */}
-              <div className="relative h-48 w-full overflow-hidden bg-zinc-950">
+              <div className="relative h-48 w-full overflow-hidden bg-white border-b border-orange-200">
                 <img
                   src={item.imageUrl}
                   alt={item.name}
@@ -274,11 +272,11 @@ export const ShoppingSection: React.FC = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
-                  <span className="px-2 py-0.5 rounded-md bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-[10px] font-mono font-bold text-amber-400 uppercase">
+                  <span className="px-2 py-0.5 rounded-md bg-white/90 backdrop-blur-xs border border-orange-300 text-[10px] font-mono font-bold text-orange-900 uppercase">
                     {item.category}
                   </span>
                   {item.featured && (
-                    <span className="px-1.5 py-0.5 rounded-md bg-amber-500 text-zinc-950 text-[10px] font-black uppercase tracking-wider">
+                    <span className="px-1.5 py-0.5 rounded-md bg-orange-500 text-white text-[10px] font-black uppercase tracking-wider">
                       ★ TOP VALUE
                     </span>
                   )}
@@ -289,12 +287,12 @@ export const ShoppingSection: React.FC = () => {
                   )}
                 </div>
 
-                <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1.5 bg-zinc-950/90 backdrop-blur-md px-2.5 py-1 rounded-md border border-zinc-800">
-                  <span className="text-white font-mono font-black text-sm">
+                <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-md border border-orange-300 shadow-xs">
+                  <span className="text-zinc-900 font-mono font-black text-sm">
                     ₹{item.price.toLocaleString('en-IN')}
                   </span>
                   {item.originalPrice && (
-                    <span className="text-zinc-500 font-mono text-xs line-through">
+                    <span className="text-zinc-400 font-mono text-xs line-through">
                       ₹{item.originalPrice.toLocaleString('en-IN')}
                     </span>
                   )}
@@ -304,21 +302,21 @@ export const ShoppingSection: React.FC = () => {
               {/* Product Info */}
               <div className="p-4.5 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center justify-between text-xs text-zinc-400 mb-1">
-                    <span className="font-semibold text-zinc-500 uppercase tracking-wider text-[10px]">
+                  <div className="flex items-center justify-between text-xs text-zinc-500 mb-1">
+                    <span className="font-semibold text-orange-800 uppercase tracking-wider text-[10px]">
                       {item.brand}
                     </span>
-                    <div className="flex items-center gap-1 text-amber-400 font-mono text-[11px]">
-                      <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                    <div className="flex items-center gap-1 text-orange-600 font-mono text-[11px] font-bold">
+                      <Star className="w-3.5 h-3.5 fill-orange-500 text-orange-500" />
                       <span>{item.rating}</span>
-                      <span className="text-zinc-600">({item.reviewsCount})</span>
+                      <span className="text-zinc-400">({item.reviewsCount})</span>
                     </div>
                   </div>
 
-                  <h3 className="font-bold text-white text-base group-hover:text-amber-400 transition-colors line-clamp-2">
+                  <h3 className="font-bold text-zinc-900 text-base group-hover:text-orange-700 transition-colors line-clamp-2">
                     {item.name}
                   </h3>
-                  <p className="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-zinc-600 mt-1 line-clamp-2 leading-relaxed">
                     {item.description}
                   </p>
 
@@ -327,7 +325,7 @@ export const ShoppingSection: React.FC = () => {
                     {item.benefits.map((b, idx) => (
                       <span
                         key={idx}
-                        className="text-[10px] px-2 py-0.5 rounded bg-zinc-950 text-zinc-400 border border-zinc-800/80"
+                        className="text-[10px] px-2 py-0.5 rounded bg-white text-orange-900 border border-orange-200 font-medium"
                       >
                         ✓ {b}
                       </span>
@@ -335,19 +333,19 @@ export const ShoppingSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Add to List Button */}
-                <div className="mt-4 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-emerald-400">
+                {/* Add to List Button - Green Button */}
+                <div className="mt-4 pt-3 border-t border-orange-200 flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-emerald-700">
                     <Truck className="w-3.5 h-3.5" />
                     <span>In Stock (Rs. {item.price})</span>
                   </div>
 
                   <button
                     onClick={() => toggleCartItem(item)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                       inCart
-                        ? 'bg-emerald-500 text-zinc-950'
-                        : 'bg-zinc-800 hover:bg-amber-500 text-zinc-200 hover:text-zinc-950'
+                        ? 'bg-emerald-100 text-emerald-800 border border-emerald-400 font-black'
+                        : 'bg-emerald-600 hover:bg-emerald-500 text-white font-black shadow-xs'
                     }`}
                   >
                     {inCart ? (
@@ -371,34 +369,34 @@ export const ShoppingSection: React.FC = () => {
 
       {/* Slide-over / Modal Shopping Checklist Drawer */}
       {showDrawer && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex justify-end">
-          <div className="bg-zinc-900 border-l border-zinc-800 w-full max-w-md h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-200">
-            {/* Drawer Header */}
-            <div className="p-5 border-b border-zinc-800 flex items-center justify-between">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex justify-end">
+          <div className="bg-white border-l-2 border-orange-300 w-full max-w-md h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-200 text-zinc-900">
+            {/* Drawer Header - Orange Div */}
+            <div className="p-5 border-b border-orange-200 bg-orange-50 flex items-center justify-between">
               <div>
-                <h3 className="font-bold text-white text-lg flex items-center gap-2">
-                  <ShoppingBag className="w-5 h-5 text-amber-400" />
+                <h3 className="font-bold text-zinc-900 text-lg flex items-center gap-2">
+                  <ShoppingBag className="w-5 h-5 text-orange-600" />
                   <span>My Fitness Shopping List</span>
                 </h3>
-                <p className="text-xs text-zinc-400">
+                <p className="text-xs text-zinc-500">
                   {shoppingCart.length} item{shoppingCart.length === 1 ? '' : 's'} • Tick off items as you buy
                 </p>
               </div>
 
               <button
                 onClick={() => setShowDrawer(false)}
-                className="text-zinc-400 hover:text-white p-1 cursor-pointer text-lg"
+                className="text-zinc-500 hover:text-zinc-900 p-1 cursor-pointer text-lg font-bold"
               >
                 ✕
               </button>
             </div>
 
             {/* Checklist Items */}
-            <div className="p-5 flex-1 overflow-y-auto divide-y divide-zinc-800/60">
+            <div className="p-5 flex-1 overflow-y-auto divide-y divide-orange-100">
               {shoppingCart.length === 0 ? (
-                <div className="text-center py-12 text-zinc-500">
-                  <ShoppingBag className="w-12 h-12 mx-auto mb-2 opacity-40" />
-                  <p className="text-sm font-semibold">Your shopping list is empty</p>
+                <div className="text-center py-12 text-zinc-400">
+                  <ShoppingBag className="w-12 h-12 mx-auto mb-2 opacity-40 text-orange-500" />
+                  <p className="text-sm font-semibold text-zinc-700">Your shopping list is empty</p>
                   <p className="text-xs mt-1">Add budget dumbbells, lifting straps, whey, or oats from the store.</p>
                 </div>
               ) : (
@@ -417,21 +415,21 @@ export const ShoppingSection: React.FC = () => {
                           onClick={() => toggleCheck(item.id)}
                           className={`w-5 h-5 rounded-md mt-0.5 flex items-center justify-center border transition-all cursor-pointer ${
                             isChecked
-                              ? 'bg-emerald-500 border-emerald-500 text-zinc-950'
-                              : 'bg-zinc-950 border-zinc-700 text-transparent hover:border-amber-400'
+                              ? 'bg-emerald-600 border-emerald-600 text-white'
+                              : 'bg-white border-orange-300 text-transparent hover:border-emerald-500'
                           }`}
                         >
                           <Check className="w-3.5 h-3.5 stroke-[3]" />
                         </button>
 
                         <div className="min-w-0">
-                          <h4 className="text-xs font-bold text-white truncate">
+                          <h4 className="text-xs font-bold text-zinc-900 truncate">
                             {item.name}
                           </h4>
-                          <span className="text-[10px] font-mono text-zinc-400">
+                          <span className="text-[10px] font-mono text-zinc-500">
                             {item.category} • ₹{item.price.toLocaleString('en-IN')}
                             {item.discountPercent && (
-                              <span className="ml-1.5 text-red-400 font-bold">({item.discountPercent}% OFF)</span>
+                              <span className="ml-1.5 text-red-600 font-bold">({item.discountPercent}% OFF)</span>
                             )}
                           </span>
                         </div>
@@ -439,7 +437,7 @@ export const ShoppingSection: React.FC = () => {
 
                       <button
                         onClick={() => toggleCartItem(item)}
-                        className="text-zinc-600 hover:text-red-400 p-1 flex-shrink-0 cursor-pointer"
+                        className="text-zinc-400 hover:text-red-500 p-1 flex-shrink-0 cursor-pointer"
                         title="Remove"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -450,12 +448,12 @@ export const ShoppingSection: React.FC = () => {
               )}
             </div>
 
-            {/* Drawer Footer */}
+            {/* Drawer Footer - Orange Div with Green Button */}
             {shoppingCart.length > 0 && (
-              <div className="p-5 border-t border-zinc-800 bg-zinc-950/70 space-y-3">
+              <div className="p-5 border-t border-orange-200 bg-orange-50 space-y-3">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-zinc-400 font-medium">Estimated Total:</span>
-                  <span className="font-mono text-xl font-black text-amber-400">
+                  <span className="text-zinc-600 font-medium">Estimated Total:</span>
+                  <span className="font-mono text-xl font-black text-orange-700">
                     ₹{cartTotal.toLocaleString('en-IN')}
                   </span>
                 </div>
@@ -463,14 +461,14 @@ export const ShoppingSection: React.FC = () => {
                 <div className="flex gap-2">
                   <button
                     onClick={copyChecklist}
-                    className="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 border border-zinc-700 transition-colors cursor-pointer"
+                    className="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-sm"
                   >
-                    {isCopied ? <CheckCheck className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                    {isCopied ? <CheckCheck className="w-4 h-4 text-white" /> : <Copy className="w-4 h-4" />}
                     <span>{isCopied ? 'Checklist Copied!' : 'Copy Checklist'}</span>
                   </button>
                   <button
                     onClick={() => saveCart([])}
-                    className="px-3 py-2.5 rounded-xl bg-zinc-900 hover:bg-red-500/20 text-zinc-400 hover:text-red-400 text-xs border border-zinc-800 transition-colors cursor-pointer"
+                    className="px-3 py-2.5 rounded-xl bg-white hover:bg-red-50 text-zinc-500 hover:text-red-600 text-xs border border-orange-200 transition-colors cursor-pointer"
                     title="Clear list"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -484,4 +482,3 @@ export const ShoppingSection: React.FC = () => {
     </div>
   );
 };
-
